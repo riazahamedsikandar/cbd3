@@ -13,6 +13,7 @@ import {
   Sparkles,
   X,
   ArrowUp,
+  ShoppingBag,
 } from "lucide-react";
 import {
   BlogPost,
@@ -51,6 +52,9 @@ import ProductCard from "./components/ProductCard";
 import TermsPage from "./components/TermsPage";
 import PrivacyPage from "./components/PrivacyPage";
 import ContactPage from "./components/ContactPage";
+import NewsletterBanner from "./components/NewsletterBanner";
+import QuestionsHelp from "./components/QuestionsHelp";
+
 
 import {
   mapProductAutoImage,
@@ -1432,32 +1436,24 @@ export default function App() {
               setView={setView}
               setSelectedCategory={setSelectedCategory}
               categories={categories}
+              products={products}
             />
 
-            {/* Sourcing and About details section */}
-            <About />
-
-            {/* Handpicked Best-Seller limit showcase */}
-            <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-12 bg-white border-b border-[#e1e8db]">
+            {/* Popular Products section matching Herbalist template in screenshot */}
+            <section className="py-16 sm:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-white border-b border-[#e1e8db]">
               <div className="max-w-7xl mx-auto space-y-12">
-                <div className="text-center space-y-2 max-w-xl mx-auto">
-                  <p className="text-[11px] font-mono tracking-widest text-[#3b142e] uppercase font-bold">
-                    CUSTOMER FAVORITES
-                  </p>
-                  <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#2c3527] leading-tight">
-                    Our Best Selling{" "}
-                    <span className="text-[#3b142e]">Organic Formulas</span>
+                <div className="text-center space-y-3 max-w-xl mx-auto font-sans">
+                  <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#13382c] tracking-tight">
+                    Popular Products
                   </h2>
-                  <p className="text-[#5b6b55] text-xs sm:text-sm">
-                    Hand-crafted products preferred by our local community
-                    families in Hurst, TX.
+                  <p className="text-[#52796f] text-sm">
+                    Hand-crafted organic hemp formulations preferred by our local community in Hurst, TX.
                   </p>
                 </div>
 
-                {/* Grid limit of best sellers / featured homepage items (9 products) */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* 4-column product grid matching screenshot */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
                   {(() => {
-                    // Combine products marked as featured/bestseller and all other products so new additions always show
                     const combinedList: Product[] = [];
                     const featured = products.filter((p) => p.isFeaturedHome || p.isBestSeller);
                     featured.forEach((p) => combinedList.push(p));
@@ -1467,14 +1463,14 @@ export default function App() {
                       }
                     });
 
-                    // Sort so products with custom/valid images are prioritized
                     const sortedList = combinedList.sort((a, b) => {
                       const aHasImg = a.image && a.image.trim() && !a.image.includes("placeholder") ? 1 : 0;
                       const bHasImg = b.image && b.image.trim() && !b.image.includes("placeholder") ? 1 : 0;
                       return bHasImg - aHasImg;
                     });
 
-                    const homeProducts = sortedList.slice(0, 9);
+                    // Show 8 products (2 rows of 4 columns)
+                    const homeProducts = sortedList.slice(0, 8);
 
                     return homeProducts.map((product) => (
                       <ProductCard
@@ -1487,28 +1483,50 @@ export default function App() {
                   })()}
                 </div>
 
-                <div className="text-center pt-4">
+                {/* Carousel indicator dots matching Herbalist screenshot */}
+                <div className="flex items-center justify-center gap-2 pt-2">
+                  <span className="w-6 h-2 rounded-full bg-[#13382c]"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#e1e8db]"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#e1e8db]"></span>
+                  <span className="w-2 h-2 rounded-full bg-[#e1e8db]"></span>
+                </div>
+
+                <div className="text-center pt-2">
                   <button
                     onClick={() => {
                       setView("shop");
                       window.scrollTo({ top: 0, behavior: "smooth" });
                     }}
-                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#3b142e] hover:bg-[#5d2a49] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md"
+                    className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full bg-[#13382c] hover:bg-[#1e493c] text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer"
                   >
-                    <span>View Whole Shop</span>
+                    <span>View Whole Catalog</span>
                     <ChevronRight className="w-4 h-4" />
                   </button>
                 </div>
               </div>
             </section>
 
-            {/* Special Opening Promo with countdown */}
-            <Promo />
+            {/* Special Spotlight: CBD Facial Serum Anti-Aging + Daily Moisturizer with countdown */}
+            <Promo
+              onShopClick={() => {
+                setView("shop");
+                window.scrollTo({ top: 300, behavior: "smooth" });
+              }}
+            />
 
-            {/* Client Testimonials reviews */}
+            {/* Sign Up for Our Newsletter Banner Strip with leaf backdrop */}
+            <NewsletterBanner />
+
+            {/* Your Trust is Our Top Concern - 4 Testimonial Cards */}
             <Testimonials />
 
-            {/* Education journals blog posts summaries */}
+            {/* The Effects of Cannabis on Your Body - Split Accordion Layout */}
+            <FAQ faqsList={faqItems} />
+
+            {/* Have Any Questions? - 3 Help Cards */}
+            <QuestionsHelp settings={businessSettings} />
+
+            {/* Educational blogs & clinical insights */}
             <Blog
               postsList={blogPosts}
               isHomepage={true}
@@ -1522,9 +1540,6 @@ export default function App() {
                 window.scrollTo({ top: 0, behavior: "smooth" });
               }}
             />
-
-            {/* Expandable FAQs accordion layout */}
-            <FAQ faqsList={faqItems} />
           </div>
         )}
 
@@ -1755,6 +1770,22 @@ export default function App() {
         }}
         setView={setView}
       />
+
+      {/* Floating Shopping Cart Trigger Button matching Herbalist screenshot */}
+      <button
+        onClick={() => setIsCartOpen(!isCartOpen)}
+        className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-[#13382c] hover:bg-[#1e493c] text-white shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-105 active:scale-95 border-2 border-white/20 focus:outline-none cursor-pointer group"
+        aria-label="Open Cart"
+        title="View Shopping Cart"
+      >
+        <ShoppingBag className="w-6 h-6 text-[#dfaa5b] group-hover:scale-110 transition-transform" />
+        {cartItems.reduce((acc, it) => acc + it.quantity, 0) > 0 && (
+          <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-[#dfaa5b] text-[#13382c] font-black text-xs flex items-center justify-center font-mono shadow-md animate-pulse">
+            {cartItems.reduce((acc, it) => acc + it.quantity, 0)}
+          </span>
+        )}
+      </button>
+
 
       {/* Complete Order Checkout Secure Modal */}
       <CheckoutModal

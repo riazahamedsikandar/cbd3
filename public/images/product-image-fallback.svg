@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f4f7f2" />
+      <stop offset="100%" stop-color="#e8efe3" />
+    </linearGradient>
+    <linearGradient id="leaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d6a4f" />
+      <stop offset="100%" stop-color="#13382c" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dfaa5b" />
+      <stop offset="100%" stop-color="#b88339" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="400" rx="24" fill="url(#bg)" />
+  <circle cx="200" cy="180" r="85" fill="#ffffff" stroke="#e1e8db" stroke-width="2" />
+  <!-- Stylized Botanical Emblem -->
+  <path d="M200 115 C215 145 235 175 235 205 C235 228 219 245 200 245 C181 245 165 228 165 205 C165 175 185 145 200 115 Z" fill="url(#leaf)" />
+  <path d="M200 135 L200 245" stroke="url(#gold)" stroke-width="3" stroke-linecap="round" />
+  <path d="M200 170 C212 165 222 175 225 185" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8" />
+  <path d="M200 195 C188 190 178 200 175 210" stroke="#ffffff" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.8" />
+  <!-- Brand text -->
+  <text x="200" y="305" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="14" font-weight="800" fill="#13382c" text-anchor="middle" letter-spacing="1.5">CBD AMERICAN SHAMAN</text>
+  <text x="200" y="328" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="#2d6a4f" text-anchor="middle" letter-spacing="2">HURST, TEXAS</text>
+  <text x="200" y="350" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#dfaa5b" text-anchor="middle" letter-spacing="1.5">LAB CERTIFIED ORGANIC</text>
+</svg>

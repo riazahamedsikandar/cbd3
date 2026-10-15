@@ -170,14 +170,14 @@ export default function Blog({
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8 sm:space-y-10">
         {/* Header Title */}
-        <div className="text-center space-y-2.5 max-w-2xl mx-auto">
-          <p className="text-[11px] font-mono tracking-widest text-[#3b142e] uppercase font-bold">
+        <div className="text-center space-y-2.5 max-w-2xl mx-auto font-sans">
+          <p className="text-[11px] font-mono tracking-widest text-[#2d6a4f] uppercase font-bold">
             EDUCATIONAL JOURNAL
           </p>
-          <h2 className="text-3xl sm:text-4xl font-serif font-black tracking-tight text-[#2c3527]">
-            News & <span className="text-[#3b142e]">Articles</span>
+          <h2 className="text-3xl sm:text-4xl font-serif font-black tracking-tight text-[#13382c]">
+            News &amp; <span className="text-[#2d6a4f]">Articles</span>
           </h2>
-          <p className="text-[#5b6b55] text-xs sm:text-sm">
+          <p className="text-[#2c3527] text-xs sm:text-sm font-medium">
             Read medical insights, dosage guidance charts, cannabinoid
             comparisons, and state compliance reports compiled by our experts.
           </p>
@@ -193,7 +193,7 @@ export default function Blog({
               <div
                 key={post.id}
                 onClick={() => handleOpenPost(post)}
-                className="group rounded-2xl overflow-hidden bg-white border border-[#e1e8db] cursor-pointer hover:border-[#3b142e] hover:shadow-xl transition-all duration-300 flex flex-col shadow-xs hover:-translate-y-1"
+                className="group rounded-2xl overflow-hidden bg-white border border-[#e1e8db] cursor-pointer hover:border-[#13382c] hover:shadow-xl transition-all duration-300 flex flex-col shadow-xs hover:-translate-y-1"
               >
                 {/* Cover Image Stage - ONLY rendered if post has a verified image */}
                 {hasImage && (
@@ -208,7 +208,7 @@ export default function Blog({
                       }}
                       referrerPolicy="no-referrer"
                     />
-                    <span className="absolute bottom-3 left-3 z-10 bg-[#3b142e] text-white text-[9px] font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wider shadow-sm">
+                    <span className="absolute bottom-3 left-3 z-10 bg-[#13382c] text-white text-[9px] font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wider shadow-sm">
                       {post.category}
                     </span>
                   </div>
@@ -220,32 +220,32 @@ export default function Blog({
                     {/* If post has NO image, show category badge cleanly here */}
                     {!hasImage && (
                       <div className="flex items-center justify-between">
-                        <span className="bg-[#3b142e] text-white text-[9px] font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wider">
+                        <span className="bg-[#13382c] text-white text-[9px] font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wider">
                           {post.category}
                         </span>
-                        <div className="flex items-center gap-1.5 text-[10px] text-[#72856a] font-mono">
-                          <Calendar className="w-3 h-3 text-[#3b142e]" />
+                        <div className="flex items-center gap-1.5 text-[10px] text-[#2d6a4f] font-mono font-semibold">
+                          <Calendar className="w-3 h-3 text-[#13382c]" />
                           <span>{post.date}</span>
                         </div>
                       </div>
                     )}
 
                     {hasImage && (
-                      <div className="flex items-center gap-1.5 text-[10px] text-[#72856a] font-mono">
-                        <Calendar className="w-3 h-3 text-[#3b142e]" />
+                      <div className="flex items-center gap-1.5 text-[10px] text-[#2d6a4f] font-mono font-semibold">
+                        <Calendar className="w-3 h-3 text-[#13382c]" />
                         <span>{post.date}</span>
                       </div>
                     )}
 
-                    <h3 className="text-lg sm:text-xl font-serif font-black text-[#2c3527] group-hover:text-[#3b142e] transition-colors line-clamp-2 leading-snug">
+                    <h3 className="text-lg sm:text-xl font-serif font-black text-[#13382c] group-hover:text-[#2d6a4f] transition-colors line-clamp-2 leading-snug">
                       {post.title}
                     </h3>
-                    <p className="text-xs text-[#72856a] line-clamp-3 leading-relaxed">
+                    <p className="text-xs text-[#2c3527] line-clamp-3 leading-relaxed">
                       {post.summary}
                     </p>
                   </div>
 
-                  <div className="pt-4 border-t border-[#edf2e8] mt-4 flex items-center justify-between text-xs text-[#3b142e] font-bold uppercase tracking-wider group-hover:text-[#5d8021] transition-colors">
+                  <div className="pt-4 border-t border-[#edf2e8] mt-4 flex items-center justify-between text-xs text-[#13382c] font-bold uppercase tracking-wider group-hover:text-[#2d6a4f] transition-colors">
                     <span>Read Article</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -260,9 +260,9 @@ export default function Blog({
           <div className="text-center pt-2">
             <button
               onClick={onViewAllBlogs}
-              className="inline-flex items-center gap-2 px-8 py-3 bg-[#3b142e] hover:bg-[#5d2a49] text-white font-bold rounded-xl text-xs uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer hover:shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#13382c] hover:bg-[#1e493c] text-white font-bold rounded-full text-xs uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer hover:shadow-lg"
             >
-              <span>View All Articles & Guides</span>
+              <span>View All Articles &amp; Guides</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>

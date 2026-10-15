@@ -1,84 +1,91 @@
-import { useState } from "react";
-import { Plus, Minus, HelpCircle } from "lucide-react";
-import { FAQ_ITEMS } from "../data";
+"use client";
 
+import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
 import { FAQItem } from "../types";
+import { FAQ_ITEMS } from "../data";
 
 interface FAQProps {
   faqsList?: FAQItem[];
 }
 
 export default function FAQ({ faqsList = FAQ_ITEMS }: FAQProps) {
-  const [openId, setOpenId] = useState<string | number | null>(1);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const toggleFAQ = (id: string | number) => {
-    setOpenId(openId === id ? null : id);
+  const displayList = faqsList && faqsList.length > 0 ? faqsList : FAQ_ITEMS;
+
+  const toggle = (idx: number) => {
+    setOpenIndex(openIndex === idx ? null : idx);
   };
 
   return (
-    <section className="py-20 px-4 sm:px-6 md:px-8 lg:px-12 bg-white border-b border-[#e1e8db]">
-      <div className="max-w-4xl mx-auto space-y-12">
-        {/* Header Title */}
-        <div className="text-center space-y-3 max-w-2xl mx-auto">
-          <p className="text-[11px] font-mono tracking-widest text-[#3b142e] uppercase font-bold">
-            RESOLVING YOUR DOUBTS
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-serif font-black tracking-tight text-[#2c3527]">
-            You’ve Any <span className="text-[#3b142e]">Question?</span>
-          </h2>
-          <p className="text-[#5b6b55] text-xs sm:text-sm">
-            Learn more about dosages, compliance, certificates of analysis, and local pickup logistics in our Texas community.
-          </p>
-        </div>
+    <section id="faq-section" className="py-16 sm:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-[#ffffff] border-b border-[#e1e8db] overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Botanical Wellness Image from Herbalist Template */}
+          <div className="lg:col-span-5 relative flex justify-center items-center">
+            <div className="relative w-full aspect-[4/3] lg:aspect-[3/4] rounded-3xl overflow-hidden shadow-xl border border-[#e1e8db]">
+              <img
+                src="/images/cannabis_wellness_body_1791967588992.jpg"
+                alt="CBD American Shaman of Hurst lab-certified hemp wellness"
+                className="w-full h-full object-cover object-center"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+          </div>
 
-        {/* Accordion Questions */}
-        <div className="space-y-4 font-sans">
-          {faqsList.map((faq) => {
-            const isOpen = openId === faq.id;
-            return (
-              <div
-                key={faq.id}
-                className={`rounded-2xl border transition-all duration-300 ${
-                  isOpen
-                    ? "bg-[#f7f9f4] border-[#3b142e]/30 shadow-md"
-                    : "bg-white border-[#e1e8db] hover:border-[#3b142e] hover:bg-[#f7f9f4]/50"
-                }`}
-              >
-                {/* Accordion Trigger Header */}
-                <button
-                  onClick={() => toggleFAQ(faq.id)}
-                  className="w-full flex items-center justify-between text-left p-5 sm:p-6 focus:outline-none focus:ring-0 cursor-pointer"
-                >
-                  <div className="flex items-start gap-3.5 pr-4">
-                    <HelpCircle className={`w-5 h-5 shrink-0 mt-0.5 ${isOpen ? "text-[#3b142e]" : "text-[#72856a]"}`} />
-                    <span className="text-[#2c3527] text-xs sm:text-sm font-bold tracking-tight">
-                      {faq.question}
-                    </span>
-                  </div>
+          {/* Right Column: Title, Subtitle, and Real Store Accordion Questions */}
+          <div className="lg:col-span-7 space-y-6 text-left font-sans">
+            <div className="space-y-2">
+              <span className="text-[11px] font-mono tracking-widest text-[#2d6a4f] uppercase font-bold">
+                COMMUNITY EDUCATION &amp; ANSWERS
+              </span>
+              <h2 className="text-3xl sm:text-4xl font-serif font-black text-[#13382c] tracking-tight leading-[1.15]">
+                The Science &amp; Benefits <br />
+                of CBD &amp; Hemp
+              </h2>
+              <p className="text-[#52796f] text-sm sm:text-base leading-relaxed font-sans">
+                Learn how clean phytocannabinoids interact with your body’s endocannabinoid receptors, our Texas Farm Bill compliance, and local Hurst pickup options.
+              </p>
+            </div>
+
+            {/* Accordion List with Real Old Website FAQ Content */}
+            <div className="space-y-3 pt-2">
+              {displayList.map((faq, idx) => {
+                const isOpen = openIndex === idx;
+                return (
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center border shrink-0 transition-all ${
-                      isOpen
-                        ? "bg-[#3b142e] border-[#3b142e] text-white font-extrabold rotate-180 shadow-sm"
-                        : "bg-transparent border-[#e1e8db] text-[#5b6b55]"
-                    }`}
+                    key={faq.id || idx}
+                    className="border-b border-[#e1e8db] pb-3 transition-colors"
                   >
-                    {isOpen ? <Minus className="w-3.5 h-3.5 font-bold text-white" /> : <Plus className="w-3.5 h-3.5" />}
-                  </div>
-                </button>
+                    <button
+                      onClick={() => toggle(idx)}
+                      className="w-full py-3 flex items-center justify-between text-left cursor-pointer group focus:outline-none"
+                    >
+                      <span className={`text-sm sm:text-base font-bold transition-colors ${
+                        isOpen ? "text-[#13382c]" : "text-[#2c3527] group-hover:text-[#13382c]"
+                      }`}>
+                        {faq.question}
+                      </span>
+                      <div className="w-6 h-6 flex items-center justify-center text-[#13382c] shrink-0 ml-4">
+                        {isOpen ? (
+                          <Minus className="w-5 h-5 stroke-[2.5]" />
+                        ) : (
+                          <Plus className="w-5 h-5 stroke-[2.5]" />
+                        )}
+                      </div>
+                    </button>
 
-                {/* Collapsible Content */}
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    isOpen ? "max-h-[300px] border-t border-[#e1e8db]" : "max-h-0"
-                  }`}
-                >
-                  <div className="p-5 sm:p-6 text-[#5b6b55] text-xs sm:text-sm leading-relaxed animate-fadeIn">
-                    {faq.answer}
+                    {isOpen && (
+                      <div className="py-2.5 text-xs sm:text-sm text-[#2c3527] leading-relaxed animate-fadeIn font-sans">
+                        {faq.answer}
+                      </div>
+                    )}
                   </div>
-                </div>
-              </div>
-            );
-          })}
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
     </section>

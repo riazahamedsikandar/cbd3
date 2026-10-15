@@ -1,296 +1,145 @@
-import { useState } from "react";
-import { Shield, Sparkles, ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+"use client";
+
+import React from "react";
+import { ShieldCheck, RotateCcw, Lock, Headphones, ArrowRight, Sparkles } from "lucide-react";
 
 interface HeroProps {
   setView: (view: string) => void;
   settings?: any;
 }
 
-const SLIDES = [
-  {
-    badge: "PREMIUM HEMP & CBD • HURST, TX",
-    headingLine1: "Earthy Purity.",
-    headingLine2: "Crafted Wellness & Relief.",
-    paragraph: "Welcome to CBD American Shaman of Hurst, your local source for state-compliant hemp, CBD flowers, clean tinctures, and targeted comfort. Sourced for quality with transparent third-party testing.",
-    buttonPrimary: { text: "EXPLORE PRODUCTS", action: "shop" },
-    buttonSecondary: { text: "OUR STORY", action: "about" },
-    image: "/images/hero_bg_1779557711335.png",
-    verifiedText: "VERIFIED 100% LEGAL",
-    widget1: {
-      image: "/images/cbd_dropper_1779557730794.png",
-      label: "BEST SELLER",
-      title: "Organic CBD",
-      rating: "4.9"
-    },
-    widget2: {
-      image: "/images/thc_gummies_pack_1779557751523.png",
-      label: "POPULAR",
-      title: "Delta-9 Packs",
-      sub: "Pure Extraction"
-    },
-    commitment: {
-      label: "HURST STORE COMMITMENT",
-      title: "Small Business Owned"
-    }
-  }
-];
-
 export default function Hero({ setView, settings }: HeroProps) {
-  const [current, setCurrent] = useState(0);
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % SLIDES.length);
-  };
-
-  const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + SLIDES.length) % SLIDES.length);
-  };
-
-  const slide = settings ? {
-    badge: settings.heroBadge || "PREMIUM HEMP & CBD • HURST, TX",
-    headingLine1: settings.heroHeadingLine1 || "Earthy Purity.",
-    headingLine2: settings.heroHeadingLine2 || "Crafted Wellness & Relief.",
-    paragraph: settings.heroParagraph || "Welcome to CBD American Shaman of Hurst, your local source for state-compliant hemp, CBD flowers, clean tinctures, and targeted comfort. Sourced for quality with transparent third-party testing.",
-    buttonPrimary: { text: settings.heroButtonPrimary || "EXPLORE PRODUCTS", action: "shop" },
-    buttonSecondary: { text: settings.heroButtonSecondary || "OUR STORY", action: "about" },
-    image: settings.heroImage || "/images/hero_bg_1779557711335.png",
-    verifiedText: settings.heroVerifiedText || "VERIFIED 100% LEGAL",
-    widget1: {
-      image: settings.heroWidget1Image || "/images/cbd_dropper_1779557730794.png",
-      label: settings.heroWidget1Label || "BEST SELLER",
-      title: settings.heroWidget1Title || "Organic CBD",
-      rating: settings.heroWidget1Rating || "4.9"
-    },
-    widget2: {
-      image: settings.heroWidget2Image || "/images/thc_gummies_pack_1779557751523.png",
-      label: settings.heroWidget2Label || "POPULAR",
-      title: settings.heroWidget2Title || "Delta-9 Packs",
-      sub: settings.heroWidget2Sub || "Pure Extraction"
-    },
-    commitment: {
-      label: settings.heroCommitmentLabel || "HURST STORE COMMITMENT",
-      title: settings.heroCommitmentTitle || "Small Business Owned"
-    }
-  } : SLIDES[current];
+  const heading1 = settings?.heroHeadingLine1 || "Earthy Purity.";
+  const heading2 = settings?.heroHeadingLine2 || "Crafted Wellness & Relief.";
+  const paragraph =
+    settings?.heroParagraph ||
+    "Welcome to CBD American Shaman of Hurst, your trusted local destination for lab-tested CBD, Delta-9, artisanal tinctures, and targeted comfort.";
+  const buttonPrimaryText = settings?.heroButtonPrimary || "EXPLORE PRODUCTS";
+  const buttonSecondaryText = settings?.heroButtonSecondary || "OUR STORY";
 
   return (
-    <section id="hero-section" className="relative bg-[#f7f9f4] text-[#2c3527] overflow-hidden py-12 md:py-20 lg:py-24 px-6 sm:px-8 md:px-12 lg:px-16 border-b border-[#e1e8db] min-h-[450px] lg:min-h-[750px] flex items-center">
-      {/* Background patterns */}
-      <div className="absolute inset-0 z-0 select-none pointer-events-none">
-        <div 
-          className="absolute inset-0 opacity-[0.15]"
-          style={{
-            backgroundImage: "radial-gradient(#3b142e 0.75px, transparent 0.75px)",
-            backgroundSize: "24px 24px"
-          }}
-        ></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-[#f7f9f4] via-[#f7f9f4]/80 to-[#edf2e8]"></div>
-        <div className="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-[#3b142e]/5 blur-3xl"></div>
-      </div>
+    <div className="relative bg-[#13382c] text-white overflow-hidden font-sans">
+      {/* Hero Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 pt-12 md:pt-16 pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          {/* Left Column: Heading & CTA */}
+          <div className="lg:col-span-6 space-y-6 text-left">
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0f2d23] border border-[#dfaa5b]/40 text-[11px] font-mono font-bold tracking-widest text-[#dfaa5b] uppercase">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>ORGANIC HEMP &amp; CANNABIS WELLNESS • HURST, TX</span>
+              </div>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black tracking-tight text-white leading-[1.1]">
+                {heading1} <br />
+                <span className="text-[#dfaa5b]">{heading2}</span>
+              </h1>
+            </div>
 
+            <p className="text-white/90 text-sm sm:text-base leading-relaxed max-w-xl font-sans">
+              {paragraph}
+            </p>
 
-      <div className="relative w-full max-w-7xl mx-auto z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
-          
-          {/* Left Column: Text content */}
-          <div className="lg:col-span-6 flex flex-col items-start text-left gap-5 sm:gap-6">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={`badge-${current}`}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                transition={{ duration: 0.4 }}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#3b142e]/10 border border-[#3b142e]/20 text-[#3b142e] text-[11px] sm:text-xs font-bold tracking-wider uppercase"
+            <div className="flex flex-wrap items-center gap-4 pt-2">
+              <button
+                onClick={() => {
+                  setView("shop");
+                  window.scrollTo({ top: 300, behavior: "smooth" });
+                }}
+                className="px-8 py-3.5 rounded-full bg-[#dfaa5b] hover:bg-[#c99547] text-[#13382c] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer flex items-center gap-2"
               >
-                <Sparkles className="w-3.5 h-3.5 text-[#3b142e]" />
-                <span>{slide.badge}</span>
-              </motion.div>
-            </AnimatePresence>
-
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.h1
-                key={`heading-${current}`}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.5, delay: 0.05 }}
-                className="text-4xl sm:text-5xl lg:text-[56px] font-serif font-semibold tracking-tight text-[#2c3527] leading-[1.1]"
+                <span>{buttonPrimaryText}</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
+              <button
+                onClick={() => {
+                  setView("about");
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }}
+                className="px-8 py-3.5 rounded-full border-2 border-white/40 hover:border-white hover:bg-white/10 text-white text-xs font-bold uppercase tracking-wider transition-all duration-300 cursor-pointer"
               >
-                {slide.headingLine1} <br />
-                <span className="text-[#3b142e]">{slide.headingLine2}</span>
-              </motion.h1>
-            </AnimatePresence>
-
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.p
-                key={`para-${current}`}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-                className="text-[#5b6b55] text-sm sm:text-base leading-relaxed max-w-xl"
-              >
-                {slide.paragraph}
-              </motion.p>
-            </AnimatePresence>
-
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={`buttons-${current}`}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-                className="flex flex-wrap gap-4 mt-2"
-              >
-                <button
-                  id="explore-products-btn"
-                  onClick={() => {
-                    setView(slide.buttonPrimary.action);
-                    window.scrollTo({ top: 300, behavior: "smooth" });
-                  }}
-                  className="px-8 py-3.5 bg-[#3b142e] hover:bg-[#5d2a49] text-white text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 shadow-sm hover:shadow hover:-translate-y-0.5 active:translate-y-0 cursor-pointer"
-                >
-                  {slide.buttonPrimary.text}
-                </button>
-                <button
-                  id="our-story-btn"
-                  onClick={() => {
-                    setView(slide.buttonSecondary.action);
-                    window.scrollTo({ top: 0, behavior: "smooth" });
-                  }}
-                  className="px-8 py-3.5 bg-white border border-[#e1e8db] hover:border-[#3b142e] text-[#5b6b55] hover:text-[#2c3527] text-[11px] sm:text-xs font-bold uppercase tracking-wider rounded-full transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md"
-                >
-                  {slide.buttonSecondary.text}
-                </button>
-              </motion.div>
-            </AnimatePresence>
+                {buttonSecondaryText}
+              </button>
+            </div>
           </div>
 
-          {/* Right Column: Hero interactive image card */}
-          <div className="lg:col-span-6 hidden lg:flex justify-center items-center relative py-8 lg:py-0">
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.div
-                key={`card-${current}`}
-                initial={{ opacity: 0, scale: 0.95, rotate: -1 }}
-                animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                exit={{ opacity: 0, scale: 0.95, rotate: 1 }}
-                transition={{ duration: 0.6 }}
-                className="relative w-full max-w-[480px] aspect-[4/3] sm:aspect-square rounded-[32px] overflow-hidden shadow-xl border border-[#cbd5c2]/40 group"
-              >
-                {/* Background image */}
-                <img
-                  src={slide.image}
-                  alt=""
-                  aria-hidden="true"
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
-                  onError={(e) => {
-                    e.currentTarget.onerror = null;
-                    e.currentTarget.src = "/brand-feather.png";
-                  }}
-                />
-                
-                {/* Visual shadow overlay for legibility */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-black/20" />
+          {/* Right Column: High Resolution Botanical Studio Composition */}
+          <div className="lg:col-span-6 relative flex justify-center items-center">
+            <div className="relative w-full max-w-lg aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 group bg-[#0f2d23]">
+              <img
+                src="/images/hero_botanical_oil_1791967587839.jpg"
+                alt="CBD American Shaman of Hurst botanical oils and organic wellness"
+                className="w-full h-full object-cover object-center group-hover:scale-104 transition-transform duration-700"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#13382c]/75 via-transparent to-transparent pointer-events-none"></div>
 
-                {/* Top Right: Verified Legal Badge */}
-                <div 
-                  id="legal-verified-badge"
-                  className="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-3.5 py-1.5 rounded-full shadow-md text-[10px] font-extrabold uppercase tracking-wider text-[#3b142e] flex items-center gap-1.5 border border-[#e1e8db]"
-                >
-                  <Shield className="w-3 h-3 text-[#3b142e] fill-[#3b142e]/20" />
-                  <span>{slide.verifiedText}</span>
+              {/* Badge overlay on image */}
+              <div className="absolute bottom-4 left-4 right-4 p-3.5 rounded-xl bg-[#0f2d23]/95 border border-white/30 text-white flex items-center justify-between shadow-lg">
+                <div>
+                  <p className="text-[10px] font-mono tracking-widest text-[#dfaa5b] uppercase font-bold">
+                    Tested &amp; Certified
+                  </p>
+                  <p className="text-xs font-bold text-white">
+                    Full Spectrum &amp; Delta-9 Lab Verified
+                  </p>
                 </div>
-
-                {/* Floating Widget 1: Mid-Left */}
-                <motion.div 
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                  className="absolute left-4 sm:left-6 top-[55%] -translate-y-1/2 bg-white/95 backdrop-blur-sm px-3.5 py-3 rounded-2xl shadow-lg border border-[#e1e8db]/60 flex items-center gap-3 max-w-[210px] z-10 hover:scale-102 transition-transform"
-                >
-                  <img 
-                    src={slide.widget1.image} 
-                    alt={slide.widget1.title}
-                    className="w-10 h-10 rounded-lg object-cover bg-[#f7f9f4] border border-[#e1e8db]/40 flex-shrink-0"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = "/brand-feather.png";
-                    }}
-                  />
-                  <div>
-                    <span className="block text-[9px] font-extrabold uppercase tracking-wider text-[#3b142e]">
-                      {slide.widget1.label}
-                    </span>
-                    <span className="block text-xs font-extrabold text-[#2c3527] mt-0.5 leading-tight">
-                      {slide.widget1.title}
-                    </span>
-                    <div className="flex items-center gap-1 mt-0.5 text-amber-500 text-[10px] font-bold">
-                      <Star className="w-2.5 h-2.5 fill-amber-500 text-amber-500" />
-                      <span>{slide.widget1.rating}</span>
-                    </div>
-                  </div>
-                </motion.div>
-
-                {/* Floating Widget 2: Mid-Right */}
-                <motion.div 
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4, duration: 0.5 }}
-                  className="absolute right-4 sm:right-6 top-[32%] -translate-y-1/2 bg-white/95 backdrop-blur-sm px-3.5 py-3 rounded-2xl shadow-lg border border-[#e1e8db]/60 flex items-center gap-3 max-w-[215px] z-10 hover:scale-102 transition-transform"
-                >
-                  <img 
-                    src={slide.widget2.image} 
-                    alt={slide.widget2.title}
-                    className="w-10 h-10 rounded-lg object-cover bg-[#f7f9f4] border border-[#e1e8db]/40 flex-shrink-0"
-                    referrerPolicy="no-referrer"
-                    onError={(e) => {
-                      e.currentTarget.onerror = null;
-                      e.currentTarget.src = "/brand-feather.png";
-                    }}
-                  />
-                  <div>
-                    <span className="block text-[9px] font-extrabold uppercase tracking-wider text-amber-600">
-                      {slide.widget2.label}
-                    </span>
-                    <span className="block text-xs font-extrabold text-[#2c3527] mt-0.5 leading-tight">
-                      {slide.widget2.title}
-                    </span>
-                    <span className="block text-[9px] text-[#72856a] mt-0.5 leading-none">
-                      {slide.widget2.sub}
-                    </span>
-                  </div>
-                </motion.div>
-
-                {/* Bottom Bar Widget */}
-                <motion.div 
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.5 }}
-                  className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-3 rounded-2xl shadow-lg border border-[#e1e8db]/60 flex justify-between items-center z-10 hover:bg-white transition-colors"
-                >
-                  <div>
-                    <span className="block text-[8px] font-bold uppercase tracking-widest text-[#3b142e]">
-                      {slide.commitment.label}
-                    </span>
-                    <span className="block text-xs font-black text-[#2c3527] mt-0.5">
-                      {slide.commitment.title}
-                    </span>
-                  </div>
-                  <span className="bg-[#3b142e]/10 text-[#3b142e] border border-[#3b142e]/20 px-2.5 py-1 rounded-md text-[9px] font-bold tracking-wider uppercase">
-                    21+ REQUIRED
-                  </span>
-                </motion.div>
-
-              </motion.div>
-            </AnimatePresence>
+                <span className="px-2.5 py-1 rounded-full bg-[#dfaa5b] text-[#13382c] text-[10px] font-black uppercase tracking-wider">
+                  100% Compliant
+                </span>
+              </div>
+            </div>
           </div>
-
         </div>
       </div>
-    </section>
+
+      {/* Trust Perks Strip matching the Herbalist elementor kit layout */}
+      <div className="border-t border-white/20 bg-[#0f2d23] py-6 px-4 sm:px-6 md:px-8 lg:px-12">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-white font-sans">
+          {/* Perk 1 */}
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-[#dfaa5b]">
+              <RotateCcw className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">Returns</h4>
+              <p className="text-[11px] text-white/80">30-Day satisfaction policy</p>
+            </div>
+          </div>
+
+          {/* Perk 2 */}
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-[#dfaa5b]">
+              <ShieldCheck className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">Guarantee</h4>
+              <p className="text-[11px] text-white/80">100% third-party lab tested</p>
+            </div>
+          </div>
+
+          {/* Perk 3 */}
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-[#dfaa5b]">
+              <Lock className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">100% Secure</h4>
+              <p className="text-[11px] text-white/80">Encrypted payment gateway</p>
+            </div>
+          </div>
+
+          {/* Perk 4 */}
+          <div className="flex items-center gap-3.5">
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center shrink-0 text-[#dfaa5b]">
+              <Headphones className="w-5 h-5" />
+            </div>
+            <div>
+              <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">Online Support</h4>
+              <p className="text-[11px] text-white/80">Direct Hurst herbalists team</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

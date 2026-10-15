@@ -63,11 +63,12 @@ body {
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #3b142e;
+  background: #13382c;
 }
 
 /* Accent Selection highlight */
 ::selection {
-  background-color: rgba(59, 20, 46, 0.2);
-  color: #1c2119;
+  background-color: rgba(19, 56, 44, 0.2);
+  color: #13382c;
 }
+

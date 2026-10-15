@@ -1,87 +1,130 @@
-import { useState } from "react";
-import { Tag, Gift, Check } from "lucide-react";
+"use client";
 
-export default function Promo() {
-  const [copied, setCopied] = useState(false);
+import React, { useState, useEffect } from "react";
+import { ArrowRight, Tag } from "lucide-react";
 
-  const handleCopyCode = () => {
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText("BUDZ20");
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2500);
-    }
-  };
+interface PromoProps {
+  onShopClick?: () => void;
+}
+
+export default function Promo({ onShopClick }: PromoProps) {
+  const [timeLeft, setTimeLeft] = useState({
+    days: 30,
+    hours: 2,
+    minutes: 43,
+    seconds: 35,
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev.seconds > 0) {
+          return { ...prev, seconds: prev.seconds - 1 };
+        } else if (prev.minutes > 0) {
+          return { ...prev, minutes: 59, seconds: 59 };
+        } else if (prev.hours > 0) {
+          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 };
+        } else if (prev.days > 0) {
+          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 };
+        }
+        return prev;
+      });
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const formatNumber = (num: number) => String(num).padStart(2, "0");
 
   return (
-    <section className="relative py-16 px-4 sm:px-6 md:px-8 lg:px-12 bg-[#f7f9f4] border-b border-[#e1e8db] overflow-hidden">
-      {/* Decorative side spotlight orbs */}
-      <div className="absolute top-1/2 left-10 -translate-y-1/2 w-64 h-64 rounded-full bg-[#3b142e]/5 blur-3xl pointer-events-none"></div>
-      <div className="absolute top-1/2 right-10 -translate-y-1/2 w-64 h-64 rounded-full bg-[#c49b1a]/5 blur-3xl pointer-events-none"></div>
-
-      <div className="max-w-5xl mx-auto relative z-10 bg-white rounded-3xl p-8 sm:p-12 border border-[#e1e8db] shadow-xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center font-sans">
-          {/* Left Column: Heading & offer detail */}
-          <div className="lg:col-span-7 space-y-4 text-left">
-            <div className="inline-flex items-center gap-1.5 text-xs font-bold text-[#c49b1a] bg-[#c49b1a]/10 border border-[#c49b1a]/20 px-3.5 py-1.5 rounded-full uppercase tracking-wider">
-              <Gift className="w-3.5 h-3.5 text-[#c49b1a]" />
-              <span>Limited Offer</span>
+    <section className="py-16 sm:py-24 px-4 sm:px-6 md:px-8 lg:px-12 bg-[#ffffff] border-b border-[#e1e8db] overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Heading, description, countdown, and Shop Now CTA */}
+          <div className="lg:col-span-6 space-y-6 text-left font-sans">
+            <div className="space-y-3">
+              <span className="text-[11px] font-mono tracking-widest text-[#2d6a4f] uppercase font-bold">
+                LIMITED STOREFRONT PROMOTION
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#13382c] tracking-tight leading-[1.15]">
+                Full Spectrum Tinctures &amp; Targeted Relief
+              </h2>
+              <p className="text-[#2c3527] text-sm sm:text-base leading-relaxed max-w-xl font-medium">
+                Experience our signature water-soluble hemp drops, restorative nighttime sleep formulas, and rich organic botanicals. Every batch is verified by ISO-certified third-party laboratories.
+              </p>
             </div>
 
-            <h2 className="text-3xl sm:text-4xl font-serif font-black tracking-tight text-[#2c3527] leading-tight select-none">
-              Claim Your <span className="text-[#3b142e]">20% Discount</span> <br />
-              at Our Hurst Store!
-            </h2>
+            {/* Countdown Boxes matching Herbalist layout */}
+            <div className="flex items-center gap-3 sm:gap-4 pt-2">
+              <div className="w-16 h-18 sm:w-20 sm:h-22 rounded-xl border border-[#2d6a4f]/30 bg-[#f4f7f2] flex flex-col items-center justify-center p-2 shadow-xs">
+                <span className="text-xl sm:text-2xl font-black text-[#13382c] font-mono leading-none">
+                  {formatNumber(timeLeft.days)}
+                </span>
+                <span className="text-[10px] font-bold text-[#52796f] uppercase tracking-wider mt-1">
+                  Days
+                </span>
+              </div>
 
-            <p className="text-[#5b6b55] text-sm leading-relaxed max-w-xl">
-              Visit our Hurst, TX store for current offers on select hemp-derived products. Present the promo code in-store or enter it at checkout.
-            </p>
+              <div className="w-16 h-18 sm:w-20 sm:h-22 rounded-xl border border-[#2d6a4f]/30 bg-[#f4f7f2] flex flex-col items-center justify-center p-2 shadow-xs">
+                <span className="text-xl sm:text-2xl font-black text-[#13382c] font-mono leading-none">
+                  {formatNumber(timeLeft.hours)}
+                </span>
+                <span className="text-[10px] font-bold text-[#52796f] uppercase tracking-wider mt-1">
+                  Hours
+                </span>
+              </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pt-2">
-              {/* Promo code visual with copy interaction */}
+              <div className="w-16 h-18 sm:w-20 sm:h-22 rounded-xl border border-[#2d6a4f]/30 bg-[#f4f7f2] flex flex-col items-center justify-center p-2 shadow-xs">
+                <span className="text-xl sm:text-2xl font-black text-[#13382c] font-mono leading-none">
+                  {formatNumber(timeLeft.minutes)}
+                </span>
+                <span className="text-[10px] font-bold text-[#52796f] uppercase tracking-wider mt-1">
+                  Minutes
+                </span>
+              </div>
+
+              <div className="w-16 h-18 sm:w-20 sm:h-22 rounded-xl border border-[#2d6a4f]/30 bg-[#f4f7f2] flex flex-col items-center justify-center p-2 shadow-xs">
+                <span className="text-xl sm:text-2xl font-black text-[#13382c] font-mono leading-none">
+                  {formatNumber(timeLeft.seconds)}
+                </span>
+                <span className="text-[10px] font-bold text-[#52796f] uppercase tracking-wider mt-1">
+                  Seconds
+                </span>
+              </div>
+            </div>
+
+            {/* Shop Now CTA Button & Promo Tag */}
+            <div className="flex flex-wrap items-center gap-4 pt-2">
               <button
-                onClick={handleCopyCode}
-                title="Click to copy promo code"
-                className="flex items-center gap-3 bg-[#f7f9f4] hover:bg-[#edf2e8] px-6 py-3.5 rounded-2xl border-2 border-dashed border-[#3b142e]/50 hover:border-[#3b142e] text-[#2c3527] font-mono font-bold text-base tracking-widest relative group shadow-sm transition-all cursor-pointer"
+                onClick={() => {
+                  if (onShopClick) {
+                    onShopClick();
+                  } else {
+                    window.location.href = "/shop";
+                  }
+                }}
+                className="px-8 py-3.5 rounded-full bg-[#dfaa5b] hover:bg-[#c99547] text-[#13382c] text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-md hover:shadow-lg inline-flex items-center gap-2 cursor-pointer"
               >
-                <Tag className="w-4 h-4 text-[#3b142e]" />
-                <span>BUDZ20</span>
-                {copied ? (
-                  <span className="flex items-center gap-1 bg-[#3b142e] text-white text-[9px] font-mono font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                    <Check className="w-3 h-3" /> COPIED
-                  </span>
-                ) : (
-                  <span className="bg-[#c49b1a] text-white text-[8px] font-mono font-black px-2 py-0.5 rounded uppercase">
-                    TAP TO COPY
-                  </span>
-                )}
+                <span>Shop Now</span>
+                <ArrowRight className="w-4 h-4" />
               </button>
 
-              <p className="text-[11px] text-[#72856a] font-mono leading-relaxed">
-                *Present in-store or apply at checkout. Standard 21+ verification applies.
-              </p>
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#f4f7f2] border border-[#e1e8db] text-xs font-mono text-[#13382c]">
+                <Tag className="w-3.5 h-3.5 text-[#2d6a4f]" />
+                <span>Use Code: <strong>BUDZ20</strong> for 20% off</span>
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Storefront Special Privilege (Clean typography, no emojis) */}
-          <div className="lg:col-span-5 flex flex-col justify-center p-6 sm:p-8 bg-[#f7f9f4] border border-[#e1e8db] rounded-2xl font-sans shrink-0 shadow-xs space-y-4 text-left">
-            <div className="text-xs font-mono text-[#3b142e] uppercase tracking-widest font-bold">
-              Storefront Special Privilege
-            </div>
-
-            <div className="space-y-4 pt-1">
-              <div>
-                <h4 className="text-sm font-bold text-[#2c3527]">In-Store &amp; Pickup Ready</h4>
-                <p className="text-xs text-[#5b6b55] leading-relaxed mt-0.5">
-                  730 W Pipeline Rd, Hurst, TX 76053.
-                </p>
-              </div>
-
-              <div>
-                <h4 className="text-sm font-bold text-[#2c3527]">100% Texas Farm-Compliant</h4>
-                <p className="text-xs text-[#5b6b55] leading-relaxed mt-0.5">
-                  All Delta-9 products strictly verified under 0.3% Δ9-THC limit.
-                </p>
-              </div>
+          {/* Right Column: Studio Composition Image matching Herbalist */}
+          <div className="lg:col-span-6 relative flex justify-center items-center">
+            <div className="relative w-full max-w-lg aspect-[4/3] rounded-3xl overflow-hidden shadow-xl border border-[#e1e8db] group">
+              <img
+                src="/images/spotlight_serum_capsules_1791967589317.jpg"
+                alt="CBD American Shaman organic capsules, tinctures, and botanical extracts"
+                className="w-full h-full object-cover object-center group-hover:scale-104 transition-transform duration-700"
+                referrerPolicy="no-referrer"
+              />
             </div>
           </div>
         </div>
