@@ -23,9 +23,9 @@ export default function ContactPage({
   setView,
   settings = {
     phone: "+1 (817) 494-3335",
-    email: "info@cbdhurst.com",
+    email: "info@cbdsouthlaketx.com",
     hours: "Monday - Friday: 10:30am - 7:30 pm | Saturday: 10:30am - 6:30 pm | Sunday: 11:00 am - 6:00 pm",
-    location: "730 W Pipeline Rd, Hurst, TX 76053",
+    location: "Southlake, TX 76092",
     heroBadge: "",
     heroHeadingLine1: "",
     heroHeadingLine2: "",
@@ -75,27 +75,27 @@ export default function ContactPage({
   };
 
   const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-    settings.location || "730 W Pipeline Rd, Hurst, TX 76053"
+    settings.location || "Southlake, TX 76092"
   )}`;
 
   return (
     <div className="animate-fadeIn min-h-screen bg-[#fcfdfe] flex flex-col font-sans pb-24 text-[#5b6b55]">
       {/* Header Banner */}
-      <div className="w-full bg-[#3b142e] text-white py-14 sm:py-20 border-b border-[#e1e8db] relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#27101f] via-[#3b142e] to-[#27101f] opacity-90" />
+      <div className="w-full bg-[#13382c] text-white py-14 sm:py-20 border-b border-[#1e493c] relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0c241c] via-[#13382c] to-[#0c241c] opacity-90" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 relative z-10 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#3b142e] text-white text-[11px] font-mono font-bold uppercase tracking-wider shadow-sm">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#2d6a4f] text-white text-[11px] font-mono font-bold uppercase tracking-wider shadow-sm">
             <Sparkles className="w-3.5 h-3.5" />
             <span>Direct Storefront & Wellness Support</span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-serif font-black text-white leading-tight tracking-tight">
-            Contact CBD American Shaman of Hurst <br className="hidden sm:inline" />
-            <span className="text-[#f0bc37]">Hurst, Texas</span>
+            Contact CBD American Shaman of Southlake <br className="hidden sm:inline" />
+            <span className="text-[#dfaa5b]">Southlake, Texas</span>
           </h1>
 
           <p className="text-xs sm:text-sm text-[#cbd5c2] max-w-2xl leading-relaxed">
-            Stop by our Hurst storefront or connect with our certified botanical consultants for personalized cannabinoid guidance, batch lab metrics, and store pickup options.
+            Stop by our Southlake storefront (cbdsouthlaketx) or connect with our certified botanical consultants for personalized cannabinoid guidance, batch lab metrics, and store pickup options.
           </p>
         </div>
       </div>
@@ -117,7 +117,7 @@ export default function ContactPage({
                     Physical Storefront
                   </h3>
                   <p className="text-xs text-[#72856a]">
-                    Hurst, Tarrant County, Texas
+                    Southlake, Tarrant County, Texas
                   </p>
                 </div>
               </div>
@@ -221,7 +221,7 @@ export default function ContactPage({
                 <span>Send Secure Inquiries</span>
               </div>
               <h2 className="text-2xl sm:text-3xl font-serif font-black text-[#2c3527]">
-                Connect with our Hurst Specialists
+                Connect with our Southlake Specialists
               </h2>
               <p className="text-xs sm:text-sm text-[#5b6b55] leading-relaxed">
                 Have a question regarding product strength, batch lab reports, or store recommendations? Send us a message and our team will respond within 4 business hours.
@@ -229,19 +229,19 @@ export default function ContactPage({
             </div>
 
             {submitted ? (
-              <div className="p-8 bg-[#f7f9f4] border border-[#3b142e]/30 rounded-2xl text-center space-y-4 animate-fadeIn">
-                <div className="w-14 h-14 bg-[#3b142e]/10 border border-[#3b142e]/30 text-[#3b142e] rounded-full flex items-center justify-center mx-auto shadow-sm">
-                  <CheckCircle2 className="w-8 h-8 text-[#3b142e]" />
+              <div className="p-8 bg-[#f7f9f4] border border-[#13382c]/30 rounded-2xl text-center space-y-4 animate-fadeIn">
+                <div className="w-14 h-14 bg-[#13382c]/10 border border-[#13382c]/30 text-[#13382c] rounded-full flex items-center justify-center mx-auto shadow-sm">
+                  <CheckCircle2 className="w-8 h-8 text-[#13382c]" />
                 </div>
                 <h3 className="text-lg font-serif font-bold text-[#2c3527]">
                   Inquiry Dispatched Successfully!
                 </h3>
                 <p className="text-xs sm:text-sm text-[#5b6b55] max-w-md mx-auto leading-relaxed">
-                  Thank you for contacting CBD American Shaman of Hurst. Our team will review your message and follow up shortly.
+                  Thank you for contacting CBD American Shaman of Southlake (cbdsouthlaketx). Our team will review your message and follow up shortly.
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="px-6 py-2.5 rounded-xl bg-[#2c3527] text-white text-xs font-bold uppercase tracking-wider hover:bg-black transition-colors cursor-pointer"
+                  className="px-6 py-2.5 rounded-xl bg-[#13382c] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#1e493c] transition-colors cursor-pointer"
                 >
                   Send Another Inquiry
                 </button>
@@ -259,7 +259,7 @@ export default function ContactPage({
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                       placeholder="e.g. Sarah Jenkins"
-                      className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#3b142e] focus:bg-white transition-colors"
+                      className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#13382c] focus:bg-white transition-colors"
                     />
                   </div>
 
@@ -273,7 +273,7 @@ export default function ContactPage({
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                       placeholder="e.g. sarah@example.com"
-                      className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#3b142e] focus:bg-white transition-colors"
+                      className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#13382c] focus:bg-white transition-colors"
                     />
                   </div>
                 </div>
@@ -288,7 +288,7 @@ export default function ContactPage({
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                       placeholder="+1 (214) 000-0000"
-                      className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#3b142e] focus:bg-white transition-colors"
+                      className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#13382c] focus:bg-white transition-colors"
                     />
                   </div>
 
@@ -299,7 +299,7 @@ export default function ContactPage({
                     <select
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#3b142e] focus:bg-white transition-colors"
+                      className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#13382c] focus:bg-white transition-colors"
                     >
                       <option value="Product Inquiry">Product Inquiry / Dosing Guidance</option>
                       <option value="Store Pickup">Store Pickup & Availability</option>
@@ -320,16 +320,16 @@ export default function ContactPage({
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                     placeholder="Describe how we can assist your wellness goals or product selection..."
-                    className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#3b142e] focus:bg-white transition-colors resize-none leading-relaxed"
+                    className="w-full px-4 py-3 bg-[#f7f9f4] border border-[#e1e8db] rounded-xl text-xs text-[#2c3527] focus:outline-none focus:border-[#13382c] focus:bg-white transition-colors resize-none leading-relaxed"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full py-4 rounded-xl bg-[#3b142e] hover:bg-[#5d2a49] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
+                  className="w-full py-4 rounded-xl bg-[#13382c] hover:bg-[#1e493c] text-white font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 transition-all cursor-pointer shadow-md"
                 >
                   <Send className="w-4 h-4 text-white" />
-                  <span>Send Secure Inquiry to CBD American Shaman of Hurst</span>
+                  <span>Send Secure Inquiry to CBD American Shaman of Southlake</span>
                 </button>
               </form>
             )}

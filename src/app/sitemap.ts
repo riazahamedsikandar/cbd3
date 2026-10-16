@@ -5,7 +5,7 @@ import { LEARN_PAGES } from '../learnPages';
 export const dynamic = 'force-static';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://cbdhurst.com';
+  const baseUrl = 'https://cbdsouthlaketx.com';
   const currentDate = new Date();
   
   const staticRoutes: MetadataRoute.Sitemap = [

@@ -35,15 +35,15 @@ export default function BlogReader({ post, onClose, onSelectProduct, onSelectTop
           </button>
           
           <div className="hidden md:flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#3b142e] animate-pulse" />
-            <span className="text-xs font-mono text-[#3b142e] font-bold uppercase tracking-widest">
-              CBD American Shaman of Hurst Journal • {post.category}
+            <span className="w-2 h-2 rounded-full bg-[#13382c] animate-pulse" />
+            <span className="text-xs font-mono text-[#13382c] font-bold uppercase tracking-widest">
+              CBD American Shaman of Southlake • {post.category?.replace(/[-_]/g, " ")}
             </span>
           </div>
 
           <button
             onClick={onClose}
-            className="w-9 h-9 rounded-full border border-[#e1e8db] hover:border-[#3b142e] bg-white text-[#5b6b55] hover:text-[#2c3527] flex items-center justify-center transition-colors focus:outline-none cursor-pointer"
+            className="w-9 h-9 rounded-full border border-[#e1e8db] hover:border-[#13382c] bg-white text-[#5b6b55] hover:text-[#2c3527] flex items-center justify-center transition-colors focus:outline-none cursor-pointer"
             title="Close article"
           >
             <X className="w-4 h-4" />
@@ -58,30 +58,27 @@ export default function BlogReader({ post, onClose, onSelectProduct, onSelectTop
           {/* Main Article Reading Column */}
           <article className="lg:col-span-8 bg-white rounded-3xl p-6 sm:p-10 md:p-12 border border-[#e1e8db] shadow-xs space-y-8">
             
-            {/* Top Article Cover Image - Natural Aspect Ratio (Never Cut, Zero White/Grey Letterbox) */}
-            {post.image && post.image.trim() !== "" && !post.image.toLowerCase().includes("placeholder") && (
-              <div className="w-full rounded-2xl overflow-hidden border border-[#e1e8db] bg-[#f7f9f4] shadow-xs">
-                <img
-                  src={post.image.trim()}
-                  alt={post.title}
-                  className="w-full h-auto max-h-[550px] object-contain object-center block rounded-2xl mx-auto"
-                  onError={(e) => {
-                    const container = (e.target as HTMLElement).parentElement;
-                    if (container) container.style.display = "none";
-                  }}
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-            )}
+            {/* Top Article Cover Image - Always visible, crisp resolution */}
+            <div className="w-full rounded-2xl overflow-hidden border border-[#e1e8db] bg-[#e8eee4] shadow-xs">
+              <img
+                src={post.image || "/images/blog_spectrum_oil.jpg"}
+                alt={post.title}
+                className="w-full h-auto max-h-[550px] object-cover object-center block rounded-2xl mx-auto"
+                onError={(e) => {
+                  (e.target as HTMLImageElement).src = "/images/blog_spectrum_oil.jpg";
+                }}
+                referrerPolicy="no-referrer"
+              />
+            </div>
 
             {/* Article Heading & Meta Details */}
             <div className="space-y-4 pb-6 border-b border-[#edf2e8]">
               <div className="flex flex-wrap items-center gap-3">
-                <span className="px-3.5 py-1.5 bg-[#3b142e] text-white text-[11px] font-mono font-bold rounded-full uppercase tracking-wider inline-block">
-                  {post.category}
+                <span className="px-3.5 py-1.5 bg-[#13382c] text-white text-[11px] font-mono font-bold rounded-full uppercase tracking-wider inline-block">
+                  {(post.category || "Hemp Wellness").replace(/[-_]/g, " ")}
                 </span>
-                <span className="text-xs font-mono text-gray-400 flex items-center gap-1.5">
-                  <ShieldCheck className="w-4 h-4 text-[#3b142e]" />
+                <span className="text-xs font-mono text-gray-500 flex items-center gap-1.5">
+                  <ShieldCheck className="w-4 h-4 text-[#13382c]" />
                   <span>Certified Botanical Guidance</span>
                 </span>
               </div>
@@ -92,16 +89,16 @@ export default function BlogReader({ post, onClose, onSelectProduct, onSelectTop
 
               <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#72856a] font-mono pt-2">
                 <div className="flex items-center gap-1.5">
-                  <Calendar className="w-4 h-4 text-[#3b142e]" />
+                  <Calendar className="w-4 h-4 text-[#13382c]" />
                   <span>Published on {post.date}</span>
                 </div>
                 <div className="flex items-center gap-1.5">
-                  <User className="w-4 h-4 text-[#3b142e]" />
+                  <User className="w-4 h-4 text-[#13382c]" />
                   <span>Authored by {post.author}</span>
                 </div>
-                <div className="flex items-center gap-1.5 text-[#5d2a49]">
+                <div className="flex items-center gap-1.5 text-[#13382c]">
                   <BookOpen className="w-4 h-4" />
-                  <span>CBD American Shaman of Hurst</span>
+                  <span>CBD American Shaman of Southlake</span>
                 </div>
               </div>
 
@@ -250,15 +247,15 @@ export default function BlogReader({ post, onClose, onSelectProduct, onSelectTop
             )}
 
             {/* In-Store Dispensary Visit Callout */}
-            <div className="bg-gradient-to-br from-[#2c3527] to-[#1e241a] rounded-3xl p-6 text-white space-y-3 shadow-md border border-[#3b4734]">
-              <span className="inline-block bg-[#f0bc37] text-[#2c3527] text-[10px] font-mono font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
+            <div className="bg-gradient-to-br from-[#13382c] to-[#0c241c] rounded-3xl p-6 text-white space-y-3 shadow-md border border-[#2d6a4f]/30">
+              <span className="inline-block bg-[#f0bc37] text-[#13382c] text-[10px] font-mono font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
                 Visit In Person
               </span>
               <h4 className="text-lg font-serif font-black leading-tight text-white">
-                Hurst Storefront
+                Southlake Storefront
               </h4>
               <p className="text-xs text-[#cbd5c2] leading-relaxed">
-                730 W Pipeline Rd, Hurst, TX 76053. Walk-ins welcome for expert consultations.
+                Southlake, TX. Walk ins welcome for personalized botanical consultations.
               </p>
               <div className="pt-1 text-xs font-mono font-bold">
                 Call: <a href="tel:+18174943335" className="text-[#f0bc37] hover:text-white underline underline-offset-2 transition-colors">(817) 494-3335</a>

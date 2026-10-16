@@ -15,7 +15,7 @@ export default function GlobalError({
         <div className="max-w-md bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
           <h2 className="text-2xl font-serif font-bold text-[#2c3527] mb-3">Something went wrong</h2>
           <p className="text-sm text-gray-500 mb-6">
-            {error?.message || "An unexpected error occurred while loading CBD American Shaman of Hurst."}
+            {error?.message || "An unexpected error occurred while loading cbdsouthlaketx."}
           </p>
           <button
             onClick={() => reset()}

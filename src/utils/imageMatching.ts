@@ -202,7 +202,7 @@ export const getJpgOrWebp = (jpgName: string, webpName: string): string => {
     "cbd", "thc", "mg", "gummies", "gummy", "free", "delta", "the", "and", "for",
     "with", "in", "of", "pack", "count", "ct", "oz", "ml", "product", "item",
     "hemp", "extract", "natural", "full", "spectrum", "broad", "bottle", "pure",
-    "raw", "daily", "blend", "formula", "super", "premium", "shaman", "hurst"
+    "raw", "daily", "blend", "formula", "super", "premium", "shaman", "southlake"
   ]);
 
   // Robust token clean extractor
@@ -561,69 +561,57 @@ export const resolveBlogImage = (
     return raw;
   }
 
-  if (LOCAL_IMAGES.length === 0) return "";
-
-  // 2. Direct ID matching for the 4 authentic educational articles (fallback to verified static assets)
-  if (idStr === "1" || idStr === "blog-3") {
-    return "/images/how-to-incorporate-cbd-into-your-daily-wellness-routine.jpg";
-  }
-  if (idStr === "2" || idStr === "blog-1") {
-    return "/images/understanding-the-purity-difference-cbd-vs-delta-9.jpg";
-  }
-  if (idStr === "3" || idStr === "blog-4") {
-    return "/images/senior-pet-care-enhancing-playtime-and-healing-rest-with-cbd.jpg";
-  }
-  if (idStr === "1787081345669" || idStr === "blog-2") {
-    return "/images/how-to-choose-the-best-cbd-products-in-flower-mound-tx.jpg";
-  }
-
-  // 3. Slug / Title matching for the 4 authentic articles
-  const cleanKey = (slugOrTitle || "")
-    .toLowerCase()
-    .replace(/[’']/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/(^-|-$)/g, "");
-
-  const ORIGINAL_BLOG_MAP: Record<string, string> = {
-    "understanding-the-purity-difference-cbd-vs-delta-9":
-      "/images/understanding-the-purity-difference-cbd-vs-delta-9.jpg",
-    "full-spectrum-vs-broad-spectrum-vs-cbd-isolate":
-      "/images/understanding-the-purity-difference-cbd-vs-delta-9.jpg",
-    "how-to-choose-the-best-cbd-products-in-flower-mound-tx":
-      "/images/how-to-choose-the-best-cbd-products-in-flower-mound-tx.jpg",
-    "how-to-choose-the-best-cbd-products-in-flower-mound":
-      "/images/how-to-choose-the-best-cbd-products-in-flower-mound-tx.jpg",
-    "how-to-incorporate-cbd-into-your-daily-wellness-routine":
-      "/images/how-to-incorporate-cbd-into-your-daily-wellness-routine.jpg",
-    "cbd-gummies-vs-cbd-oil-which-one-is-better-for-you":
-      "/images/how-to-incorporate-cbd-into-your-daily-wellness-routine.jpg",
-    "senior-pet-care-enhancing-playtime-and-healing-rest-with-cbd":
-      "/images/senior-pet-care-enhancing-playtime-and-healing-rest-with-cbd.jpg",
-    "what-first-time-cbd-buyers-in-flower-mound-should-know":
-      "/images/senior-pet-care-enhancing-playtime-and-healing-rest-with-cbd.jpg",
-  };
-
-  if (ORIGINAL_BLOG_MAP[cleanKey]) {
-    return ORIGINAL_BLOG_MAP[cleanKey];
-  }
-
-  // 4. Known authentic blog image assets
-  const AUTHENTIC_BLOG_IMAGES = [
-    "/images/understanding-the-purity-difference-cbd-vs-delta-9.jpg",
-    "/images/how-to-choose-the-best-cbd-products-in-flower-mound-tx.jpg",
-    "/images/how-to-incorporate-cbd-into-your-daily-wellness-routine.jpg",
-    "/images/senior-pet-care-enhancing-playtime-and-healing-rest-with-cbd.jpg",
-    "/restored-images/understanding-the-purity-difference-cbd-vs-delta-9.jpg",
-    "/restored-images/how-to-choose-the-best-cbd-products-in-flower-mound-tx.jpg",
-    "/restored-images/how-to-incorporate-cbd-into-your-daily-wellness-routine.jpg",
-    "/restored-images/senior-pet-care-enhancing-playtime-and-healing-rest-with-cbd.jpg",
+  // Real verified botanical blog images in /public/images/
+  const BLOG_IMAGE_ASSETS = [
+    "/images/blog_spectrum_oil.jpg",
+    "/images/blog_store_interior.jpg",
+    "/images/blog_gummies_fruit.jpg",
+    "/images/blog_wellness_care.jpg",
+    "/images/hero_botanical_oil_1791967587839.jpg",
+    "/images/spotlight_serum_capsules_1791967589317.jpg",
   ];
 
-  if (raw && AUTHENTIC_BLOG_IMAGES.some((auth) => raw.endsWith(auth) || raw === auth)) {
+  // If raw points to an existing real asset, return it
+  if (raw && (BLOG_IMAGE_ASSETS.includes(raw) || raw.startsWith("/images/categories/"))) {
     return raw;
   }
 
-  // 5. Otherwise, strictly empty string
-  return "";
+  // 2. Direct ID matching for educational blog articles
+  if (idStr === "1" || idStr === "blog-1" || idStr === "2") {
+    return "/images/blog_spectrum_oil.jpg";
+  }
+  if (idStr === "blog-2" || idStr === "1787081345669") {
+    return "/images/blog_store_interior.jpg";
+  }
+  if (idStr === "blog-3" || idStr === "3") {
+    return "/images/blog_gummies_fruit.jpg";
+  }
+  if (idStr === "blog-4" || idStr === "4") {
+    return "/images/blog_wellness_care.jpg";
+  }
+
+  // 3. Slug / Keyword matching for articles
+  const cleanKey = (slugOrTitle || "").toLowerCase();
+  if (cleanKey.includes("spectrum") || cleanKey.includes("isolate") || cleanKey.includes("difference")) {
+    return "/images/blog_spectrum_oil.jpg";
+  }
+  if (cleanKey.includes("store") || cleanKey.includes("choose") || cleanKey.includes("buyer") || cleanKey.includes("southlake")) {
+    return "/images/blog_store_interior.jpg";
+  }
+  if (cleanKey.includes("gumm") || cleanKey.includes("edible") || cleanKey.includes("oil-which")) {
+    return "/images/blog_gummies_fruit.jpg";
+  }
+  if (cleanKey.includes("wellness") || cleanKey.includes("routine") || cleanKey.includes("pet") || cleanKey.includes("relief")) {
+    return "/images/blog_wellness_care.jpg";
+  }
+
+  // 4. Reliable fallback based on string hash so every blog displays a beautiful image
+  let hash = 0;
+  const hashSource = (idStr || slugOrTitle || "blog");
+  for (let i = 0; i < hashSource.length; i++) {
+    hash = (hash + hashSource.charCodeAt(i)) % BLOG_IMAGE_ASSETS.length;
+  }
+  return BLOG_IMAGE_ASSETS[hash] || "/images/blog_spectrum_oil.jpg";
 };
+
 

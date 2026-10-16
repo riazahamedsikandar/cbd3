@@ -34,7 +34,11 @@ export default function Products({
     const list = [{ id: "all", label: "All Products" }];
     const sourceList = categoriesList && categoriesList.length > 0 ? categoriesList : DEFAULT_CATEGORIES;
     sourceList.forEach((cat) => {
-      list.push({ id: cat.id, label: cat.title });
+      const cleanLabel = (cat.title || cat.id || "")
+        .replace(/_+/g, " ")
+        .replace(/-+/g, " ")
+        .trim();
+      list.push({ id: cat.id, label: cleanLabel });
     });
     return list;
   }, [categoriesList]);

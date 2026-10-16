@@ -1,24 +1,25 @@
 /**
- * CBD American Shaman of Hurst Hostinger MySQL Database Client
+ * CBD American Shaman of Southlake (cbdsouthlaketx) Hostinger MySQL Database Client
  * Replaces Supabase SDK with direct HTTP integration to the Hostinger PHP MySQL bridge.
  * Database: u554546348_cbdsouthlake | User: u554546348_cbdsouthlake
  */
 
 import { normalizeToCleanAsset } from "./imageMatching";
 
-export const CURRENT_CACHE_VERSION = "2026.10.12-cbdhurst-v11";
+export const CURRENT_CACHE_VERSION = "2026.10.16-cbdsouthlaketx-v12";
 
 export const checkAndAutoPurgeStaleCache = () => {
   if (typeof window === "undefined") return;
   try {
-    const cachedVersion = localStorage.getItem("twobudz_cache_version");
+    const cachedVersion = localStorage.getItem("cbdsouthlaketx_cache_version");
     if (cachedVersion !== CURRENT_CACHE_VERSION) {
       localStorage.removeItem("twobudz_products");
       localStorage.removeItem("twobudz_custom_products");
       localStorage.removeItem("twobudz_blogs");
+      localStorage.removeItem("hurstcbd_blogs");
       localStorage.removeItem("twobudz_api_url");
       localStorage.removeItem("hurstcbd_api_url");
-      localStorage.setItem("twobudz_cache_version", CURRENT_CACHE_VERSION);
+      localStorage.setItem("cbdsouthlaketx_cache_version", CURRENT_CACHE_VERSION);
     }
   } catch (e) {}
 };
@@ -34,13 +35,13 @@ export const safeSetItem = (key: string, value: string) => {
 // Get API base URL: relative "/api/index.php" on Hostinger hosting, or configured URL
 export const getApiUrl = (): string => {
   if (typeof window === "undefined") {
-    return process.env.NEXT_PUBLIC_API_URL || "https://cbdhurst.com/api/index.php";
+    return process.env.NEXT_PUBLIC_API_URL || "https://cbdsouthlaketx.com/api/index.php";
   }
-  const custom = localStorage.getItem("twobudz_api_url") || localStorage.getItem("hurstcbd_api_url");
-  if (custom && !custom.includes("cornflowerblue") && !custom.includes("shophurstcbd.com")) {
+  const custom = localStorage.getItem("cbdsouthlaketx_api_url") || localStorage.getItem("twobudz_api_url") || localStorage.getItem("hurstcbd_api_url");
+  if (custom && !custom.includes("cornflowerblue") && !custom.includes("shophurstcbd.com") && !custom.includes("cbdhurst.com")) {
     return custom;
   }
-  if (custom && custom.includes("shophurstcbd.com")) {
+  if (custom && (custom.includes("shophurstcbd.com") || custom.includes("cbdhurst.com"))) {
     localStorage.removeItem("twobudz_api_url");
     localStorage.removeItem("hurstcbd_api_url");
   }

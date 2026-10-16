@@ -12,7 +12,7 @@ interface QuestionsHelpProps {
 }
 
 export default function QuestionsHelp({ settings }: QuestionsHelpProps) {
-  const location = settings?.location || "730 W Pipeline Rd, Hurst, TX 76053";
+  const location = settings?.location || "Southlake, TX 76092";
   const phone = settings?.phone || "+1 (817) 494-3335";
 
   return (
@@ -45,7 +45,7 @@ export default function QuestionsHelp({ settings }: QuestionsHelpProps) {
               </div>
             </div>
             <p className="text-xs text-[#2c3527] mt-6 pt-4 border-t border-[#f0f4ed] leading-relaxed">
-              Serving the Hurst, Euless, Bedford, and greater Dallas-Fort Worth metroplex with premium hemp.
+              Serving Southlake, Colleyville, Grapevine, Westlake, and the greater Dallas Fort Worth metroplex with premium hemp.
             </p>
           </div>
 

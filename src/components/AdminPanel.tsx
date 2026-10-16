@@ -353,19 +353,55 @@ export default function AdminPanel({
       setBusinessSettings(backupToRestore.settings);
       if (Array.isArray(backupToRestore.reviews)) {
         setReviews(backupToRestore.reviews);
+        safeSetItem("cbdsouthlaketx_reviews", JSON.stringify(backupToRestore.reviews));
         safeSetItem("twobudz_reviews", JSON.stringify(backupToRestore.reviews));
       }
 
-      // 2. Persist to LocalStorage
-      safeSetItem("twobudz_products", JSON.stringify(backupToRestore.products));
-      safeSetItem("twobudz_categories", JSON.stringify(backupToRestore.categories));
-      safeSetItem("twobudz_blogs", JSON.stringify(backupToRestore.blogs));
-      safeSetItem("twobudz_faqs", JSON.stringify(backupToRestore.faqs));
-      safeSetItem("twobudz_orders", JSON.stringify(backupToRestore.orders));
-      safeSetItem("twobudz_inquiries", JSON.stringify(backupToRestore.inquiries));
-      safeSetItem("twobudz_settings", JSON.stringify(backupToRestore.settings));
-      safeSetItem("twobudz_business_settings", JSON.stringify(backupToRestore.settings));
-      safeSetItem("twobudz_business_info", JSON.stringify(backupToRestore.settings));
+      // 2. Persist to LocalStorage across cbdsouthlaketx and legacy fallback keys
+      const prodJson = JSON.stringify(backupToRestore.products);
+      safeSetItem("cbdsouthlaketx_products", prodJson);
+      safeSetItem("cbdsouthlake_products", prodJson);
+      safeSetItem("twobudz_products", prodJson);
+      safeSetItem("hurstcbd_products", prodJson);
+
+      const catJson = JSON.stringify(backupToRestore.categories);
+      safeSetItem("cbdsouthlaketx_categories", catJson);
+      safeSetItem("cbdsouthlake_categories", catJson);
+      safeSetItem("twobudz_categories", catJson);
+      safeSetItem("hurstcbd_categories", catJson);
+
+      const blogJson = JSON.stringify(backupToRestore.blogs);
+      safeSetItem("cbdsouthlaketx_blogs", blogJson);
+      safeSetItem("cbdsouthlake_blogs", blogJson);
+      safeSetItem("twobudz_blogs", blogJson);
+      safeSetItem("hurstcbd_blogs", blogJson);
+
+      const faqJson = JSON.stringify(backupToRestore.faqs);
+      safeSetItem("cbdsouthlaketx_faqs", faqJson);
+      safeSetItem("cbdsouthlake_faqs", faqJson);
+      safeSetItem("twobudz_faqs", faqJson);
+      safeSetItem("hurstcbd_faqs", faqJson);
+
+      const orderJson = JSON.stringify(backupToRestore.orders);
+      safeSetItem("cbdsouthlaketx_orders", orderJson);
+      safeSetItem("twobudz_orders", orderJson);
+
+      const inqJson = JSON.stringify(backupToRestore.inquiries);
+      safeSetItem("cbdsouthlaketx_inquiries", inqJson);
+      safeSetItem("twobudz_inquiries", inqJson);
+
+      const setJson = JSON.stringify(backupToRestore.settings);
+      safeSetItem("cbdsouthlaketx_settings", setJson);
+      safeSetItem("cbdsouthlaketx_business_settings", setJson);
+      safeSetItem("cbdsouthlake_settings", setJson);
+      safeSetItem("twobudz_settings", setJson);
+      safeSetItem("twobudz_business_settings", setJson);
+      safeSetItem("twobudz_business_info", setJson);
+
+      // Trigger instant UI reload across the entire application
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("store-data-updated"));
+      }
 
       // 3. Sync to Supabase if available
       if (isSupabaseConfigured()) {
@@ -464,7 +500,7 @@ export default function AdminPanel({
     }),
     category: "Wellness Guide",
     image: "",
-    author: "CBD American Shaman of Hurst Team",
+    author: "CBD American Shaman of Southlake Team",
   });
 
   // FAQ Forms State
@@ -644,12 +680,12 @@ export default function AdminPanel({
   const insertLinkAtFormKey = (formType: "product" | "blog", key: string) => {
     const text = prompt(
       "Enter the display text for your hyperlink:",
-      "CBD American Shaman of Hurst Organic CBD",
+      "CBD American Shaman of Southlake Organic CBD",
     );
     if (!text) return;
     const url = prompt(
       "Enter the destination URL (including http/https):",
-      "https://cbdhurst.com",
+      "https://cbdsouthlaketx.com",
     );
     if (!url) return;
     const formattedLink = `[${text}](${url})`;
@@ -1651,11 +1687,11 @@ export default function AdminPanel({
     try {
       let parsedProducts: Product[] = [];
 
-      // Check if user uploaded or pasted JSON array
+      // Check if user uploaded or pasted JSON array or store object
       if (textToParse.trim().startsWith("[") || textToParse.trim().startsWith("{")) {
         try {
           const jsonVal = JSON.parse(textToParse.trim());
-          const list = Array.isArray(jsonVal) ? jsonVal : [jsonVal];
+          const list = Array.isArray(jsonVal) ? jsonVal : Array.isArray(jsonVal.products) ? jsonVal.products : [jsonVal];
           parsedProducts = list.map((item: any, i: number) => {
             const name = item.name || item.title || item.product_name;
             if (!name) {
@@ -2021,8 +2057,15 @@ export default function AdminPanel({
       }
 
       setProducts(updatedList);
+      safeSetItem("cbdsouthlaketx_products", JSON.stringify(updatedList));
+      safeSetItem("cbdsouthlake_products", JSON.stringify(updatedList));
       safeSetItem("twobudz_products", JSON.stringify(updatedList));
+      safeSetItem("hurstcbd_products", JSON.stringify(updatedList));
       safeSetItem("twobudz_products_preloaded", "true");
+
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("store-data-updated"));
+      }
 
       let successFeedback = "";
       if (mode === "replace") {
@@ -2091,7 +2134,7 @@ export default function AdminPanel({
       "\"Third-party lab tested; Organically farm certified\"",
       "\"99.2%\"",
       "\"Full Spectrum Distillate\"",
-      "\"Buy Sample Product | CBD American Shaman of Hurst\"",
+      "\"Buy Sample Product | CBD American Shaman of Southlake\"",
       "\"Order premium sample product with natural organic ingredients.\"",
       "\"gummies, hemp, organic\"",
       "\"Sample Product Package Image\"",
@@ -2106,7 +2149,7 @@ export default function AdminPanel({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CBD American Shaman of Hurst_Empty_Product_Upload_Template.csv`;
+    a.download = `CBD American Shaman of Southlake_Empty_Product_Upload_Template.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -2222,7 +2265,7 @@ export default function AdminPanel({
         options: ["15 Gummies Pack", "30 Gummies Pack"],
         benefits: ["Sustained relaxation", "Third party lab verified", "100% Organic hemp"],
         labResults: { purity: "99.8%", cannabinoids: "Delta-9 + CBD Extract" },
-        metaTitle: "Buy Delta 9 Live Resin Gummies | CBD American Shaman of Hurst",
+        metaTitle: "Buy Delta 9 Live Resin Gummies | CBD American Shaman of Southlake",
         metaDescription: "Shop organic Delta 9 Live Resin Gummies with 10mg Delta-9 THC per piece.",
         tags: "gummies, delta 9, live resin, edibles",
         altText: "Delta 9 Live Resin Gummies Bottle",
@@ -2244,7 +2287,7 @@ export default function AdminPanel({
         options: ["30ml Bottle", "60ml Value Size"],
         benefits: ["Rapid absorption", "Non-GMO certified", "All day calm"],
         labResults: { purity: "99.5%", cannabinoids: "Full Spectrum Distillate" },
-        metaTitle: "Full Spectrum CBD Tincture 1000mg | CBD American Shaman of Hurst",
+        metaTitle: "Full Spectrum CBD Tincture 1000mg | CBD American Shaman of Southlake",
         metaDescription: "Order premium 1000mg CBD tincture formulated with organic carrier oil.",
         tags: "tincture, cbd oil, full spectrum, organic",
         altText: "Full Spectrum CBD Tincture Bottle Drop",
@@ -2294,7 +2337,7 @@ export default function AdminPanel({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CBD American Shaman of Hurst_Products_Catalog_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `CBD American Shaman of Southlake_Products_Catalog_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -2328,7 +2371,7 @@ export default function AdminPanel({
       if (textToParse.trim().startsWith("[") || textToParse.trim().startsWith("{")) {
         try {
           const jsonVal = JSON.parse(textToParse.trim());
-          const list = Array.isArray(jsonVal) ? jsonVal : [jsonVal];
+          const list = Array.isArray(jsonVal) ? jsonVal : Array.isArray(jsonVal.blogs) ? jsonVal.blogs : [jsonVal];
           parsedBlogs = list.map((item: any, i: number) => ({
             id: item.id ? (typeof item.id === "number" ? item.id : parseInt(String(item.id)) || Date.now() + i) : Date.now() + i,
             title: item.title || item.name || "Bulk Article " + (i + 1),
@@ -2336,8 +2379,8 @@ export default function AdminPanel({
             content: item.content || item.body || item.summary || "Full detailed article content...",
             date: item.date || new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }),
             category: item.category || "Education",
-            image: item.image || PRESET_IMAGES[2].url,
-            author: item.author || "CBD American Shaman of Hurst Team",
+            image: item.image || "/images/blog_spectrum_oil.jpg",
+            author: item.author || "CBD American Shaman of Southlake Team",
             slug: item.slug || (item.title || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
             metaTitle: item.metaTitle || item.title || "",
             metaDescription: item.metaDescription || item.summary || "",
@@ -2375,7 +2418,7 @@ export default function AdminPanel({
           const summary = summaryIdx !== -1 ? row[summaryIdx] : "Educational guide.";
           const content = contentIdx !== -1 ? row[contentIdx] : summary;
           const category = categoryIdx !== -1 && row[categoryIdx] ? row[categoryIdx] : "Education";
-          const author = authorIdx !== -1 && row[authorIdx] ? row[authorIdx] : "CBD American Shaman of Hurst Team";
+          const author = authorIdx !== -1 && row[authorIdx] ? row[authorIdx] : "CBD American Shaman of Southlake Team";
           const date = dateIdx !== -1 && row[dateIdx] ? row[dateIdx] : new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
           const image = imageIdx !== -1 && row[imageIdx] ? row[imageIdx] : PRESET_IMAGES[2].url;
           const slug = slugIdx !== -1 && row[slugIdx] ? row[slugIdx] : title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
@@ -2416,13 +2459,20 @@ export default function AdminPanel({
 
       const merged = [...blogPosts, ...uniqueNew];
       setBlogPosts(merged);
+      safeSetItem("cbdsouthlaketx_blogs", JSON.stringify(merged));
+      safeSetItem("cbdsouthlake_blogs", JSON.stringify(merged));
       safeSetItem("twobudz_blogs", JSON.stringify(merged));
+      safeSetItem("hurstcbd_blogs", JSON.stringify(merged));
+
+      if (typeof window !== "undefined") {
+        window.dispatchEvent(new Event("store-data-updated"));
+      }
 
       if (isSupabaseConfigured()) {
         uniqueNew.forEach((b) => syncToSupabase("blogs", "upsert", b));
       }
 
-      setBlogCsvFeedback(`Success! Imported ${uniqueNew.length} new blog articles. Existing ${blogPosts.length} articles preserved!`);
+      setBlogCsvFeedback(`Success! Imported ${uniqueNew.length} new blog articles. Total blogs: ${merged.length}!`);
       setBlogCsvText("");
       setTimeout(() => setBlogCsvFeedback(""), 7000);
     } catch (err: any) {
@@ -2455,7 +2505,7 @@ export default function AdminPanel({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CBD American Shaman of Hurst_Blogs_Export_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `CBD American Shaman of Southlake_Blogs_Export_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -2554,10 +2604,10 @@ export default function AdminPanel({
     }
 
     const category = frontmatter["category"] || "Cannabinoid Science";
-    const author = frontmatter["author"] || "CBD American Shaman of Hurst Wellness Team";
+    const author = frontmatter["author"] || "CBD American Shaman of Southlake Wellness Team";
     const date = frontmatter["date"] || new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
     const image = frontmatter["image"] || "";
-    const metaTitle = frontmatter["metatitle"] || `${title} | CBD American Shaman of Hurst`;
+    const metaTitle = frontmatter["metatitle"] || `${title} | CBD American Shaman of Southlake`;
     const tags = frontmatter["tags"] || "cbd, wellness, flower mound, hemp";
 
     // Clean draft/internal notes safely without swallowing article body
@@ -2760,7 +2810,7 @@ export default function AdminPanel({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CBD American Shaman of Hurst_FAQs_Export_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `CBD American Shaman of Southlake_FAQs_Export_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
   };
 
@@ -2801,7 +2851,7 @@ export default function AdminPanel({
             const lastName = parts.slice(1).join(" ") || "Client";
             const email = item.customerEmail || item.email || (item.customer && item.customer.email) || "customer@example.com";
             const phone = item.customerPhone || item.phone || (item.customer && item.customer.phone) || "555-0199";
-            const address = item.shippingAddress || item.address || (item.customer && item.customer.address) || "Hurst, TX";
+            const address = item.shippingAddress || item.address || (item.customer && item.customer.address) || "Southlake, TX";
             const totalVal = typeof item.totalAmount === "number" ? item.totalAmount : parseFloat(String(item.totalAmount || item.total || "49.99").replace(/[^0-9.]/g, "")) || 49.99;
 
             return {
@@ -2812,9 +2862,9 @@ export default function AdminPanel({
                 email,
                 phone,
                 address,
-                city: "Hurst",
+                city: "Southlake",
                 state: "TX",
-                zipCode: "75028",
+                zipCode: "76092",
               },
               items: item.items || [{ productName: "Assorted Product Order", selectedOption: "Standard", quantity: 1, price: totalVal }],
               subtotal: totalVal,
@@ -2858,12 +2908,12 @@ export default function AdminPanel({
           const firstName = parts[0] || "Customer";
           const lastName = parts.slice(1).join(" ") || "Client";
           const id = idIdx !== -1 && row[idIdx] ? row[idIdx] : "ORD-" + Math.floor(100000 + Math.random() * 900000);
-          const email = emailIdx !== -1 && row[emailIdx] ? row[emailIdx] : "client@cbdhurst.com";
-          const phone = phoneIdx !== -1 && row[phoneIdx] ? row[phoneIdx] : "972-555-0100";
+          const email = emailIdx !== -1 && row[emailIdx] ? row[emailIdx] : "client@cbdsouthlaketx.com";
+          const phone = phoneIdx !== -1 && row[phoneIdx] ? row[phoneIdx] : "817-494-3335";
           const totalVal = totalIdx !== -1 ? parseFloat(row[totalIdx].replace(/[^0-9.]/g, "")) || 49.99 : 49.99;
           const status = statusIdx !== -1 && row[statusIdx] ? row[statusIdx] : "Completed";
           const date = dateIdx !== -1 && row[dateIdx] ? row[dateIdx] : new Date().toISOString().split("T")[0];
-          const address = addrIdx !== -1 && row[addrIdx] ? row[addrIdx] : "Hurst, TX";
+          const address = addrIdx !== -1 && row[addrIdx] ? row[addrIdx] : "Southlake, TX";
 
           parsedOrders.push({
             id,
@@ -2873,9 +2923,9 @@ export default function AdminPanel({
               email,
               phone,
               address,
-              city: "Hurst",
+              city: "Southlake",
               state: "TX",
-              zipCode: "75028",
+              zipCode: "76092",
             },
             items: [{ productName: "Assorted Product Order", selectedOption: "Standard", quantity: 1, price: totalVal }],
             subtotal: totalVal,
@@ -2943,7 +2993,7 @@ export default function AdminPanel({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CBD American Shaman of Hurst_Orders_Export_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `CBD American Shaman of Southlake_Orders_Export_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
   };
 
@@ -2980,7 +3030,7 @@ export default function AdminPanel({
           parsedInquiries = list.map((item: any, i: number) => ({
             id: item.id || "INQ-" + Math.floor(100000 + Math.random() * 900000),
             name: item.name || "Inquirer " + (i + 1),
-            email: item.email || "inquiry@cbdhurst.com",
+            email: item.email || "inquiry@cbdsouthlaketx.com",
             msg: item.msg || item.message || "Bulk imported inquiry message...",
             date: item.date || new Date().toISOString().split("T")[0],
             status: item.status || "unread",
@@ -3011,7 +3061,7 @@ export default function AdminPanel({
           if (!name.trim()) continue;
 
           const id = idIdx !== -1 && row[idIdx] ? row[idIdx] : "INQ-" + Math.floor(100000 + Math.random() * 900000);
-          const email = emailIdx !== -1 && row[emailIdx] ? row[emailIdx] : "user@cbdhurst.com";
+          const email = emailIdx !== -1 && row[emailIdx] ? row[emailIdx] : "user@cbdsouthlaketx.com";
           const msg = msgIdx !== -1 && row[msgIdx] ? row[msgIdx] : "General inquiry submitted.";
           const date = dateIdx !== -1 && row[dateIdx] ? row[dateIdx] : new Date().toISOString().split("T")[0];
           const status = statusIdx !== -1 && row[statusIdx] ? row[statusIdx] : "unread";
@@ -3077,7 +3127,7 @@ export default function AdminPanel({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CBD American Shaman of Hurst_Inquiries_Export_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `CBD American Shaman of Southlake_Inquiries_Export_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
   };
 
@@ -3256,7 +3306,7 @@ export default function AdminPanel({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CBD American Shaman of Hurst_Product_Reviews_${new Date().toISOString().split("T")[0]}.csv`;
+    a.download = `CBD American Shaman of Southlake_Product_Reviews_${new Date().toISOString().split("T")[0]}.csv`;
     a.click();
   };
 
@@ -3288,13 +3338,13 @@ export default function AdminPanel({
         }),
       category: blogForm.category || "Education",
       image: (blogForm.image || "").trim(),
-      author: blogForm.author || "CBD American Shaman of Hurst Editor",
+      author: blogForm.author || "CBD American Shaman of Southlake Editor",
       slug: finalSlug,
       metaTitle: blogForm.metaTitle || "",
       metaDescription: blogForm.metaDescription || "",
       tags: blogForm.tags || "",
       altText: blogForm.altText || "",
-      canonicalUrl: (blogForm.canonicalUrl || "").trim() || `https://cbdhurst.com/blog/${finalSlug}`,
+      canonicalUrl: (blogForm.canonicalUrl || "").trim() || `https://cbdsouthlaketx.com/blog/${finalSlug}`,
       isFeaturedHome: blogForm.isFeaturedHome ?? true,
     };
 
@@ -3333,7 +3383,7 @@ export default function AdminPanel({
       }),
       category: "Wellness Guide",
       image: "",
-      author: "CBD American Shaman of Hurst Team",
+      author: "CBD American Shaman of Southlake Team",
       slug: "",
       metaTitle: "",
       metaDescription: "",
@@ -3505,7 +3555,7 @@ export default function AdminPanel({
             </div>
             <div>
               <h2 className="text-base sm:text-lg md:text-xl font-bold uppercase tracking-tight text-[#2c3527] line-clamp-1">
-                CBD American Shaman of Hurst{" "}
+                CBD American Shaman of Southlake{" "}
                 <span className="text-[#3b142e]">Central Admin Console</span>
               </h2>
               <p className="text-[9px] sm:text-[10px] text-[#5b6b55] uppercase tracking-widest font-mono line-clamp-1">
@@ -3568,7 +3618,7 @@ export default function AdminPanel({
               </div>
               <div className="space-y-1.5">
                 <h3 className="font-bold text-[#2c3527] text-lg uppercase tracking-wider">
-                  CBD American Shaman of Hurst Admin Console
+                  CBD American Shaman of Southlake Admin Console
                 </h3>
                 <p className="text-xs text-[#5b6b55]">
                   Please enter your administrator username and password to proceed.
@@ -3810,7 +3860,7 @@ export default function AdminPanel({
                   <div className="bg-[#edf2e8] p-4 rounded-2xl border border-[#e1e8db] flex items-center justify-between">
                     <div>
                       <h3 className="font-bold text-sm text-[#2c3527]">
-                        Welcome back to CBD American Shaman of Hurst Office Desk
+                        Welcome back to CBD American Shaman of Southlake Office Desk
                       </h3>
                       <p className="text-xs text-[#5b6b55]">
                         These live simulations modify and reflect changes on
@@ -4693,7 +4743,7 @@ export default function AdminPanel({
                               name="altText"
                               value={productForm.altText || ""}
                               onChange={handleProductInputChange}
-                              placeholder="e.g. CBD American Shaman of Hurst Broad Spectrum CBD Sleep Tincture Bottle"
+                              placeholder="e.g. CBD American Shaman of Southlake Broad Spectrum CBD Sleep Tincture Bottle"
                               className="w-full p-2.5 bg-white border border-[#cbd5c2] rounded-xl focus:outline-none focus:border-[#3b142e] text-xs"
                             />
                           </div>
@@ -5320,7 +5370,7 @@ export default function AdminPanel({
                                       name="altText"
                                       value={productForm.altText || ""}
                                       onChange={handleProductInputChange}
-                                      placeholder="e.g. CBD American Shaman of Hurst Broad Spectrum CBD Sleep Tincture Bottle"
+                                      placeholder="e.g. CBD American Shaman of Southlake Broad Spectrum CBD Sleep Tincture Bottle"
                                       className="w-full p-2.5 bg-white border border-[#cbd5c2] rounded-xl focus:outline-none focus:border-[#3b142e] text-xs"
                                     />
                                   </div>
@@ -6171,7 +6221,7 @@ export default function AdminPanel({
                       <textarea
                         value={blogCsvText}
                         onChange={(e) => setBlogCsvText(e.target.value)}
-                        placeholder="Title,Summary,Content,Category,Author,Date,Image&#10;Understanding CBD Oils,A comprehensive guide on dosage,Detailed article body goes here...,Education,CBD American Shaman of Hurst Team,Jan 12 2025,https://image.url"
+                        placeholder="Title,Summary,Content,Category,Author,Date,Image&#10;Understanding CBD Oils,A comprehensive guide on dosage,Detailed article body goes here...,Education,CBD American Shaman of Southlake Team,Jan 12 2025,https://image.url"
                         rows={5}
                         className="w-full p-3 bg-white border border-[#e1e8db] rounded-xl font-mono text-xs focus:ring-1 focus:ring-[#3b142e] focus:outline-none"
                       />
@@ -6259,7 +6309,7 @@ export default function AdminPanel({
                           </label>
                           <input
                             type="text"
-                            value={blogForm.author || "CBD American Shaman of Hurst Team"}
+                            value={blogForm.author || "CBD American Shaman of Southlake Team"}
                             onChange={(e) =>
                               setBlogForm({
                                 ...blogForm,
@@ -6370,7 +6420,7 @@ export default function AdminPanel({
                               url: "/images/how-to-choose-the-best-cbd-products-in-flower-mound-tx.jpg",
                             },
                             {
-                              label: "CBD American Shaman of Hurst Leaf",
+                              label: "CBD American Shaman of Southlake Leaf",
                               url: "/images/hero_bg_1779557711335.png",
                             },
                             {
@@ -6563,7 +6613,7 @@ export default function AdminPanel({
                                   altText: e.target.value,
                                 })
                               }
-                              placeholder="e.g. CBD American Shaman of Hurst Hemp leaves detailing premium terpenes under amber light"
+                              placeholder="e.g. CBD American Shaman of Southlake Hemp leaves detailing premium terpenes under amber light"
                               className="w-full p-2 bg-white border border-[#cbd5c2] rounded-lg focus:outline-none focus:border-[#3b142e]"
                             />
                           </div>
@@ -6583,7 +6633,7 @@ export default function AdminPanel({
                                   metaTitle: e.target.value,
                                 })
                               }
-                              placeholder="e.g. Complete Sourcing Guide to Premium Hemp Terpenes | CBD American Shaman of Hurst"
+                              placeholder="e.g. Complete Sourcing Guide to Premium Hemp Terpenes | CBD American Shaman of Southlake"
                               className="w-full p-2 bg-white border border-[#cbd5c2] rounded-lg focus:outline-none focus:border-[#3b142e]"
                             />
                           </div>
@@ -6731,7 +6781,7 @@ export default function AdminPanel({
                               summary: blogForm.summary || "",
                               content: blogForm.content || "",
                               category: blogForm.category || "Wellness Guide",
-                              author: blogForm.author || "CBD American Shaman of Hurst Team",
+                              author: blogForm.author || "CBD American Shaman of Southlake Team",
                               date: blogForm.date || new Date().toLocaleDateString(),
                               image: blogForm.image || "",
                               slug: blogForm.slug || "",
@@ -8218,7 +8268,7 @@ export default function AdminPanel({
                         }
                         required
                         className="w-full p-2.5 bg-white border border-[#e1e8db] rounded-xl"
-                        placeholder="Hurst, Texas (75028)"
+                        placeholder="Southlake, Texas (75028)"
                       />
                     </div>
 
@@ -8420,7 +8470,7 @@ export default function AdminPanel({
                             }
                             rows={3}
                             className="w-full p-2.5 bg-white border border-[#e1e8db] rounded-xl text-xs"
-                            placeholder="Welcome to CBD American Shaman of Hurst, Hurst's trusted source..."
+                            placeholder="Welcome to CBD American Shaman of Southlake, Hurst's trusted source..."
                           />
                         </div>
 
@@ -8600,7 +8650,7 @@ export default function AdminPanel({
                               })
                             }
                             className="w-full p-2.5 bg-white border border-[#e1e8db] rounded-xl text-xs"
-                            placeholder="CBD American Shaman of Hurst | Premium Organic Hemp & CBD Hurst TX"
+                            placeholder="CBD American Shaman of Southlake | Premium Organic Hemp & CBD Hurst TX"
                           />
                         </div>
 
@@ -9000,7 +9050,7 @@ export default function AdminPanel({
                               Click or Drag & Drop Backup JSON File Here
                             </p>
                             <p className="text-[10px] text-gray-500 font-mono mt-1">
-                              Supports CBD American Shaman of Hurst Full Backup (.json)
+                              Supports CBD American Shaman of Southlake Full Backup (.json)
                             </p>
                           </div>
                         </div>
@@ -9343,7 +9393,7 @@ export default function AdminPanel({
                       </div>
                       <div className="flex items-center gap-1.5">
                         <BookOpen className="w-4 h-4 text-[#3b142e]" />
-                        <span>Authored by {previewingBlog.author || "CBD American Shaman of Hurst Team"}</span>
+                        <span>Authored by {previewingBlog.author || "CBD American Shaman of Southlake Team"}</span>
                       </div>
                     </div>
                   </div>
@@ -9381,7 +9431,7 @@ export default function AdminPanel({
                             Topic: {previewingBlog.category || "Wellness"}
                           </div>
                           <div className="rounded-2xl border border-[#e1e8db] bg-[#f7f9f4] p-3 text-xs font-bold text-[#5b6b55]">
-                            Author: {previewingBlog.author || "CBD American Shaman of Hurst Team"}
+                            Author: {previewingBlog.author || "CBD American Shaman of Southlake Team"}
                           </div>
                         </div>
                       </div>

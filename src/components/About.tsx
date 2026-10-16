@@ -53,11 +53,11 @@ export default function About() {
           </div>
 
           <h2 className="text-3xl sm:text-4xl font-serif font-black tracking-tight text-[#13382c] leading-tight">
-            CBD American Shaman of Hurst: <span className="text-[#2d6a4f]">Cultivating Trusted Relief</span>
+            CBD American Shaman of Southlake: <span className="text-[#2d6a4f]">Cultivating Trusted Relief</span>
           </h2>
 
           <p className="text-[#52796f] text-sm leading-relaxed">
-            In Hurst, Texas, our store is committed to helping customers explore clean, legal, hemp-derived products. We source from licensed hemp cultivators and prioritize third-party lab testing.
+            In Southlake, Texas, our store (cbdsouthlaketx) is committed to helping customers explore clean, legal, hemp-derived products. We source from licensed USA hemp cultivators and prioritize transparent third party lab testing.
           </p>
 
           {/* Interactive Trust Metric Bars */}
@@ -87,7 +87,7 @@ export default function About() {
                 <Check className="w-3 h-3" />
               </div>
               <span className="text-xs text-[#52796f] leading-relaxed">
-                100% farm-compliant less than 0.3% THC ratio
+                100% farm compliant less than 0.3% THC ratio
               </span>
             </div>
             <div className="flex items-start gap-2.5">
@@ -102,7 +102,7 @@ export default function About() {
 
           <div className="mt-4">
             <button
-              onClick={() => setShowManifesto(!showManifesto)}
+              onClick={() => showManifesto ? setShowManifesto(false) : setShowManifesto(true)}
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-[#e1e8db] hover:border-[#13382c] bg-white text-xs font-bold text-[#52796f] hover:text-[#13382c] uppercase tracking-wider transition-all duration-300 shadow-sm cursor-pointer"
             >
               {showManifesto
@@ -119,14 +119,14 @@ export default function About() {
                 <span>Our Sacred Standards</span>
               </p>
               <p>
-                At CBD American Shaman of Hurst, we refuse to cut corners. We recognize that
+                At CBD American Shaman of Southlake (cbdsouthlaketx), we refuse to cut corners. We recognize that
                 cannabidiol and natural industrial hemp variants represent
-                highly active botanical systems. Therefore, our soil enrichment,
+                active botanical systems. Therefore, our soil enrichment,
                 crop extraction filters, and molecular curing represent
-                surgical-level focus.
+                precision focus.
               </p>
               <p>
-                Whether you walk into physical local store or place order
+                Whether you walk into our physical Southlake store or place an order
                 online, we treat you like family. Our guidance models are
                 structured logically behind real certifications, dose advisory
                 tracks, and genuine science to bring balance to your body, mind,

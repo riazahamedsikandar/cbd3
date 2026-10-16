@@ -13,7 +13,7 @@ export default function Hero({ setView, settings }: HeroProps) {
   const heading2 = settings?.heroHeadingLine2 || "Crafted Wellness & Relief.";
   const paragraph =
     settings?.heroParagraph ||
-    "Welcome to CBD American Shaman of Hurst, your trusted local destination for lab-tested CBD, Delta-9, artisanal tinctures, and targeted comfort.";
+    "Welcome to CBD American Shaman of Southlake (cbdsouthlaketx), your trusted local destination for lab-tested CBD, Delta 9, artisanal tinctures, and targeted comfort.";
   const buttonPrimaryText = settings?.heroButtonPrimary || "EXPLORE PRODUCTS";
   const buttonSecondaryText = settings?.heroButtonSecondary || "OUR STORY";
 
@@ -27,7 +27,7 @@ export default function Hero({ setView, settings }: HeroProps) {
             <div className="space-y-3">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#0f2d23] border border-[#dfaa5b]/40 text-[11px] font-mono font-bold tracking-widest text-[#dfaa5b] uppercase">
                 <Sparkles className="w-3.5 h-3.5" />
-                <span>ORGANIC HEMP &amp; CANNABIS WELLNESS • HURST, TX</span>
+                <span>ORGANIC HEMP &amp; CANNABIS WELLNESS • SOUTHLAKE TX</span>
               </div>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black tracking-tight text-white leading-[1.1]">
                 {heading1} <br />
@@ -67,7 +67,7 @@ export default function Hero({ setView, settings }: HeroProps) {
             <div className="relative w-full max-w-lg aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-2 border-white/20 group bg-[#0f2d23]">
               <img
                 src="/images/hero_botanical_oil_1791967587839.jpg"
-                alt="CBD American Shaman of Hurst botanical oils and organic wellness"
+                alt="CBD American Shaman of Southlake botanical oils and organic wellness"
                 className="w-full h-full object-cover object-center group-hover:scale-104 transition-transform duration-700"
                 referrerPolicy="no-referrer"
               />
@@ -80,7 +80,7 @@ export default function Hero({ setView, settings }: HeroProps) {
                     Tested &amp; Certified
                   </p>
                   <p className="text-xs font-bold text-white">
-                    Full Spectrum &amp; Delta-9 Lab Verified
+                    Full Spectrum &amp; Delta 9 Lab Verified
                   </p>
                 </div>
                 <span className="px-2.5 py-1 rounded-full bg-[#dfaa5b] text-[#13382c] text-[10px] font-black uppercase tracking-wider">
@@ -135,7 +135,7 @@ export default function Hero({ setView, settings }: HeroProps) {
             </div>
             <div>
               <h4 className="text-xs sm:text-sm font-bold text-white leading-tight">Online Support</h4>
-              <p className="text-[11px] text-white/80">Direct Hurst herbalists team</p>
+              <p className="text-[11px] text-white/80">Direct Southlake herbalists team</p>
             </div>
           </div>
         </div>

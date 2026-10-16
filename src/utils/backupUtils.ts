@@ -65,7 +65,7 @@ export const createFullBackupObject = (
     metadata: {
       createdAt: timestamp,
       version: "2.0",
-      source: "CBD American Shaman of Hurst Admin Control Center",
+      source: "CBD American Shaman of Southlake Admin Control Center",
       itemCounts: {
         products: Array.isArray(products) ? products.length : 0,
         categories: Array.isArray(categories) ? categories.length : 0,
@@ -92,7 +92,7 @@ export const createFullBackupObject = (
  */
 export const downloadBackupJSON = (backupObj: StoreBackupData) => {
   const dateStr = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19);
-  const fileName = `CBD_American_Shaman_Hurst_Backup_${dateStr}.json`;
+  const fileName = `cbdsouthlaketx_Backup_${dateStr}.json`;
   const jsonStr = JSON.stringify(backupObj, null, 2);
   
   const blob = new Blob([jsonStr], { type: "application/json;charset=utf-8;" });
@@ -123,21 +123,108 @@ export const validateBackupData = (data: any): { valid: boolean; error?: string;
   }
 
   if (typeof parsed !== "object" || parsed === null) {
-    return { valid: false, error: "Backup payload must be a valid JSON object." };
+    return { valid: false, error: "Backup payload must be a valid JSON object or array." };
   }
 
-  // Support both full snapshot structure and standard catalog arrays
-  const products = Array.isArray(parsed.products) ? parsed.products : Array.isArray(parsed) ? parsed : [];
-  const categories = Array.isArray(parsed.categories) ? parsed.categories : [];
-  const blogs = Array.isArray(parsed.blogs) ? parsed.blogs : [];
-  const faqs = Array.isArray(parsed.faqs) ? parsed.faqs : [];
-  const orders = Array.isArray(parsed.orders) ? parsed.orders : [];
-  const inquiries = Array.isArray(parsed.inquiries) ? parsed.inquiries : [];
-  const settings = parsed.settings || {};
+  // Handle direct array upload (either products or blogs)
+  let products: any[] = [];
+  let blogs: any[] = [];
+  let categories: any[] = [];
+  let faqs: any[] = [];
+  let orders: any[] = [];
+  let inquiries: any[] = [];
+  let reviews: any[] = [];
+  let settings: any = {};
 
-  if (products.length === 0 && categories.length === 0 && blogs.length === 0 && !parsed.metadata) {
-    return { valid: false, error: "Backup file contains no recognizable products, categories, blogs, or metadata." };
+  if (Array.isArray(parsed)) {
+    // Determine whether array is products or blog articles
+    const firstItem = parsed[0] || {};
+    if (firstItem.name || firstItem.price !== undefined || firstItem.sku) {
+      products = parsed;
+    } else if (firstItem.title && (firstItem.content || firstItem.summary || firstItem.body)) {
+      blogs = parsed;
+    } else {
+      products = parsed;
+    }
+  } else {
+    // Flexible keys for products
+    products = Array.isArray(parsed.products)
+      ? parsed.products
+      : Array.isArray(parsed.items)
+      ? parsed.items
+      : Array.isArray(parsed.catalog)
+      ? parsed.catalog
+      : [];
+
+    // Flexible keys for blogs
+    blogs = Array.isArray(parsed.blogs)
+      ? parsed.blogs
+      : Array.isArray(parsed.blogPosts)
+      ? parsed.blogPosts
+      : Array.isArray(parsed.posts)
+      ? parsed.posts
+      : Array.isArray(parsed.articles)
+      ? parsed.articles
+      : Array.isArray(parsed.news)
+      ? parsed.news
+      : [];
+
+    // Categories
+    categories = Array.isArray(parsed.categories)
+      ? parsed.categories
+      : Array.isArray(parsed.cats)
+      ? parsed.cats
+      : [];
+
+    // FAQs
+    faqs = Array.isArray(parsed.faqs)
+      ? parsed.faqs
+      : Array.isArray(parsed.questions)
+      ? parsed.questions
+      : Array.isArray(parsed.faqItems)
+      ? parsed.faqItems
+      : [];
+
+    // Orders, inquiries, reviews
+    orders = Array.isArray(parsed.orders) ? parsed.orders : [];
+    inquiries = Array.isArray(parsed.inquiries) ? parsed.inquiries : [];
+    reviews = Array.isArray(parsed.reviews) ? parsed.reviews : [];
+
+    // Settings
+    settings = parsed.settings || parsed.businessSettings || parsed.storeSettings || parsed.config || {};
   }
+
+  if (products.length === 0 && categories.length === 0 && blogs.length === 0 && faqs.length === 0 && !parsed.metadata && Object.keys(settings).length === 0) {
+    return { valid: false, error: "Backup file contains no recognizable products, categories, blogs, faqs, or settings." };
+  }
+
+  // Ensure blogs have valid display images and clean titles without artificial AI slugs/underscores
+  blogs = blogs.map((b, idx) => {
+    let blogImg = b.image || b.img || b.coverImage || b.featuredImage || "";
+    if (!blogImg || typeof blogImg !== "string" || blogImg.trim() === "" || blogImg.includes("undefined")) {
+      const fallbackList = [
+        "/images/blog_spectrum_oil.jpg",
+        "/images/blog_store_interior.jpg",
+        "/images/blog_gummies_fruit.jpg",
+        "/images/blog_wellness_care.jpg",
+      ];
+      blogImg = fallbackList[idx % fallbackList.length];
+    }
+    const cleanTitle = (b.title || `Wellness Article ${idx + 1}`)
+      .replace(/Flower Mound|Hurst/gi, "Southlake")
+      .replace(/twobudz/gi, "cbdsouthlaketx")
+      .replace(/[-_]/g, " ")
+      .trim();
+    return {
+      ...b,
+      id: b.id || `imported-blog-${idx + 1}`,
+      title: cleanTitle,
+      image: blogImg,
+      author: (b.author || "cbdsouthlaketx Team").replace(/Flower Mound|Hurst/gi, "Southlake").replace(/twobudz/gi, "cbdsouthlaketx"),
+      category: (b.category || "Wellness Guide").replace(/[-_]/g, " "),
+      slug: (b.slug || b.id || `blog-${idx + 1}`).toLowerCase().replace(/[^a-z0-9]/g, "-"),
+    };
+  });
 
   const constructed: StoreBackupData = {
     metadata: parsed.metadata || {
@@ -160,7 +247,7 @@ export const validateBackupData = (data: any): { valid: boolean; error?: string;
     faqs,
     orders,
     inquiries,
-    reviews: Array.isArray(parsed.reviews) ? parsed.reviews : [],
+    reviews,
     settings,
   };
 

@@ -29,7 +29,7 @@ export const CURATED_CATEGORIES: CategoryItem[] = [
     id: "tinctures",
     title: "Tinctures",
     tagline: "Tinctures",
-    desc: "Potent sublingual Delta-9 tincture oil formulations.",
+    desc: "Potent sublingual Delta 9 tincture oil formulations.",
     image: "/images/categories/tinctures.jpg",
     isFeaturedHome: true,
   },

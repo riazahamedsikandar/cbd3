@@ -24,17 +24,17 @@ export default function Footer({
   onSelectTopic,
   settings = {
     phone: "+1 (817) 494-3335",
-    email: "info@cbdhurst.com",
+    email: "info@cbdsouthlaketx.com",
     hours: "Mon - Fri: 10:30 AM - 7:30 PM | Sat: 10:30 AM - 6:30 PM | Sun: 11:00 AM - 6:00 PM",
-    location: "730 W Pipeline Rd, Hurst, TX 76053",
+    location: "Southlake, TX 76092",
   },
 }: FooterProps) {
-  // 6 Gallery thumbnail images matching the Herbalist elementor kit
+  // 6 Real botanical gallery thumbnail images
   const GALLERY_IMAGES = [
-    "/images/hero_botanical_oil_1791967587839.jpg",
-    "/images/cannabis_wellness_body_1791967588992.jpg",
-    "/images/spotlight_serum_capsules_1791967589317.jpg",
-    "/images/newsletter_leaf_bg_1791967589759.jpg",
+    "/images/blog_spectrum_oil.jpg",
+    "/images/blog_store_interior.jpg",
+    "/images/blog_gummies_fruit.jpg",
+    "/images/blog_wellness_care.jpg",
     "/images/hero_botanical_oil_1791967587839.jpg",
     "/images/cannabis_wellness_body_1791967588992.jpg",
   ];
@@ -59,7 +59,7 @@ export default function Footer({
             </div>
 
             <p className="text-xs sm:text-sm text-white/70 leading-relaxed max-w-sm">
-              CBD American Shaman of Hurst delivers transparently certified organic wellness. We help modern Texas families explore legal plant-based cannabinoids safely and effectively.
+              CBD American Shaman of Southlake (cbdsouthlaketx) delivers transparently certified organic wellness. We help modern Texas families explore legal plant-based cannabinoids safely and effectively.
             </p>
 
             {/* Social Icons */}
@@ -209,7 +209,7 @@ export default function Footer({
       {/* Bottom Copyright & Legal */}
       <div className="border-t border-white/10 py-6 px-4 text-xs text-white/60 text-center font-sans">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2026 CBD American Shaman of Hurst. All Rights Reserved.</p>
+          <p>© 2026 CBD American Shaman of Southlake (cbdsouthlaketx). All Rights Reserved.</p>
           <div className="flex items-center gap-4">
             <button
               onClick={() => {

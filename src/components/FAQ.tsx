@@ -27,7 +27,7 @@ export default function FAQ({ faqsList = FAQ_ITEMS }: FAQProps) {
             <div className="relative w-full aspect-[4/3] lg:aspect-[3/4] rounded-3xl overflow-hidden shadow-xl border border-[#e1e8db]">
               <img
                 src="/images/cannabis_wellness_body_1791967588992.jpg"
-                alt="CBD American Shaman of Hurst lab-certified hemp wellness"
+                alt="CBD American Shaman of Southlake lab-certified hemp wellness"
                 className="w-full h-full object-cover object-center"
                 referrerPolicy="no-referrer"
               />
@@ -45,7 +45,7 @@ export default function FAQ({ faqsList = FAQ_ITEMS }: FAQProps) {
                 of CBD &amp; Hemp
               </h2>
               <p className="text-[#52796f] text-sm sm:text-base leading-relaxed font-sans">
-                Learn how clean phytocannabinoids interact with your body’s endocannabinoid receptors, our Texas Farm Bill compliance, and local Hurst pickup options.
+                Learn how clean phytocannabinoids interact with your body’s endocannabinoid receptors, our Texas Farm Bill compliance, and local Southlake pickup options.
               </p>
             </div>
 

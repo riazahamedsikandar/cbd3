@@ -26,9 +26,9 @@ export default function CheckoutModal({
     email: "",
     phone: "",
     address: "",
-    city: "Hurst",
+    city: "Southlake",
     state: "Texas",
-    zipCode: "75028",
+    zipCode: "76092",
     agreeToTerms: false,
     deliveryMethod: "delivery", // delivery or pickup
     paymentMethod: "card", // card or cash
@@ -114,7 +114,7 @@ export default function CheckoutModal({
         customerEmail: formData.email,
         customerPhone: formData.phone,
         shippingAddress: formData.deliveryMethod === "pickup"
-          ? "In-Store Pickup (Hurst Front Counter)"
+          ? "In-Store Pickup (Southlake Front Counter)"
           : `${formData.address}, ${formData.city}, ${formData.state} ${formData.zipCode}`,
         items: cartItems.map((item) => ({
           productName: item.product.name,
@@ -219,7 +219,7 @@ export default function CheckoutModal({
                   <span className="text-[#72856a]">Pickup Location:</span>
                   <span className="font-semibold text-right text-[#2c3527]">
                     {formData.deliveryMethod === "pickup"
-                      ? "In-Store (Hurst Front Counter)"
+                      ? "In-Store (Southlake Front Counter)"
                       : `${formData.address}, ${formData.city}`}
                   </span>
 
@@ -231,7 +231,7 @@ export default function CheckoutModal({
 
                 {formData.deliveryMethod === "pickup" && (
                   <p className="p-3 rounded-lg bg-[#c49b1a]/5 border border-[#c49b1a]/20 text-[11px] text-[#72856a] leading-relaxed font-mono">
-                    *Pickup items are ready inside 30 minutes. Direct packaging is discrete. Our store is located in Hurst, Texas. Present 21+ valid government ID cards to receive items!
+                    *Pickup items are ready inside 30 minutes. Direct packaging is discrete. Our store is located in Southlake, Texas. Present 21+ valid government ID cards to receive items!
                   </p>
                 )}
               </div>
@@ -525,7 +525,7 @@ export default function CheckoutModal({
                 An automated order notification has been sent to the store team:
               </p>
               <div className="bg-white p-2.5 rounded-xl border border-gray-100 font-mono text-[10px] text-[#3b142e] space-y-0.5 select-all">
-                <div>• info@cbdhurst.com</div>
+                <div>• info@cbdsouthlaketx.com</div>
               </div>
               <p className="text-[#72856a] leading-relaxed italic font-semibold">
                 * A certified wellness consultant will ring you shortly at <span className="text-[#2c3527] underline decoration-wavy decoration-[#3b142e] font-sans font-bold">{formData.phone}</span> to coordinate your delivery/pickup details. Keep your phone close!
@@ -546,7 +546,7 @@ export default function CheckoutModal({
                 onClick={() => {
                   // Fallback manually trigger email client if needed
                   const itemsText = cartItems.map(item => `- ${item.product.name} x${item.quantity}`).join("\n");
-                  const mailtoRecipients = "info@cbdhurst.com";
+                  const mailtoRecipients = "info@cbdsouthlaketx.com";
                   const subject = `New Order Placed - ID: ${orderId}`;
                   const body = `Order ${orderId}\nCustomer: ${formData.firstName} ${formData.lastName}\nPhone: ${formData.phone}\nEmail: ${formData.email}\nProducts:\n${itemsText}`;
                   window.location.href = `mailto:${mailtoRecipients}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

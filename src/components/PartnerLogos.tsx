@@ -4,7 +4,7 @@ import React from "react";
 import { Sparkles, Leaf, Award, ShieldCheck } from "lucide-react";
 
 export default function PartnerLogos() {
-  // Real brands carried by CBD American Shaman of Hurst
+  // Real brands carried by CBD American Shaman of Southlake
   const brands = [
     { name: "BARNEY'S BOTANICALS", sub: "FULL SPECTRUM GUMMIES" },
     { name: "WILLIE'S REMEDY", sub: "HEMP INFUSED TONICS" },

@@ -2,23 +2,23 @@ import React from "react";
 import "../index.css";
 
 export const metadata = {
-  metadataBase: new URL("https://cbdhurst.com"),
-  title: "CBD American Shaman of Hurst | CBD & Hemp Wellness",
-  description: "Shop CBD, hemp, Delta-9, and wellness products at CBD American Shaman of Hurst in Hurst, Texas. Explore quality products with third-party lab testing.",
-  keywords: "CBD American Shaman of Hurst, CBD Hurst TX, Delta-9 Gummies, Hemp Wellness",
-  authors: [{ name: "CBD American Shaman of Hurst" }],
+  metadataBase: new URL("https://cbdsouthlaketx.com"),
+  title: "cbdsouthlaketx | CBD American Shaman of Southlake TX",
+  description: "Shop CBD, hemp, Delta 9, and wellness products at CBD American Shaman of Southlake (cbdsouthlaketx) in Southlake, Texas. Explore quality products with third party lab testing.",
+  keywords: "cbdsouthlaketx, CBD American Shaman of Southlake, CBD Southlake TX, Delta 9 Gummies, Hemp Wellness",
+  authors: [{ name: "cbdsouthlaketx" }],
   robots: "index, follow",
   verification: {
     google: "google6e8d6491cc80f400",
   },
   alternates: {
-    canonical: "https://cbdhurst.com",
+    canonical: "https://cbdsouthlaketx.com",
   },
   openGraph: {
-    title: "CBD American Shaman of Hurst | CBD & Hemp Wellness",
-    description: "Explore CBD, Delta-9, and wellness products at CBD American Shaman of Hurst in Hurst, Texas.",
-    url: "https://cbdhurst.com",
-    siteName: "CBD American Shaman of Hurst",
+    title: "cbdsouthlaketx | CBD American Shaman of Southlake TX",
+    description: "Explore CBD, Delta 9, and wellness products at CBD American Shaman of Southlake in Southlake, Texas.",
+    url: "https://cbdsouthlaketx.com",
+    siteName: "cbdsouthlaketx",
     locale: "en_US",
     type: "website",
   },
@@ -47,7 +47,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-MRH4ZLHC');`,
           }}
         />
-        <link rel="canonical" href="https://cbdhurst.com" />
+        <link rel="canonical" href="https://cbdsouthlaketx.com" />
         <link rel="icon" href="/brand-feather.png" type="image/png" sizes="any" />
         <link rel="apple-touch-icon" href="/brand-feather.png" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />

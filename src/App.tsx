@@ -104,7 +104,7 @@ export default function App() {
   const [activeInfoTopic, setActiveInfoTopic] = useState<string | null>(null);
   const [products, setProducts] = useState<Product[]>(() => {
     if (typeof window !== "undefined") {
-      for (const key of ["hurstcbd_products", "hurstcbd_custom_products", "twobudz_products", "twobudz_custom_products"]) {
+      for (const key of ["cbdsouthlaketx_products", "cbdsouthlake_products", "hurstcbd_products", "hurstcbd_custom_products", "twobudz_products", "twobudz_custom_products"]) {
         try {
           const val = localStorage.getItem(key);
           if (val) {
@@ -124,28 +124,31 @@ export default function App() {
   const [faqItems, setFaqItems] = useState<FAQItem[]>(FAQ_ITEMS);
   const [orders, setOrders] = useState<Order[]>([]);
   const [inquiries, setInquiries] = useState<Inquiry[]>([]);
-  const businessName = "CBD American Shaman of Hurst";
-  const businessEmail = "info@cbdhurst.com";
+  const businessName = "CBD American Shaman of Southlake";
+  const businessEmail = "info@cbdsouthlaketx.com";
   const storePhone = "+1 (817) 494-3335";
-  const storeLocation = "730 W Pipeline Rd, Hurst, TX 76053";
+  const storeLocation = "Southlake, TX 76092";
   const normalizeBusinessSettings = (settings: BusinessSettings): BusinessSettings => ({
     ...settings,
     phone: storePhone,
     location: storeLocation,
-    email: (settings.email || "").toLowerCase().includes("twobudz") || (settings.email || "").toLowerCase().includes("shophurstcbd")
+    email: (settings.email || "").toLowerCase().includes("twobudz") || (settings.email || "").toLowerCase().includes("shophurstcbd") || (settings.email || "").toLowerCase().includes("cbdhurst")
       ? businessEmail
       : settings.email || businessEmail,
-    heroBadge: (settings.heroBadge || "").replace(/Flower Mound/gi, "Hurst"),
+    heroBadge: (settings.heroBadge || "").replace(/Flower Mound|Hurst/gi, "Southlake").replace(/[-_]/g, " "),
     heroParagraph: (settings.heroParagraph || "")
       .replace(/Two\s*Budz/gi, businessName)
-      .replace(/Flower Mound/gi, "Hurst"),
-    heroCommitmentLabel: (settings.heroCommitmentLabel || "").replace(/TWO BUDZ/gi, "HURST STORE"),
+      .replace(/CBD American Shaman of Southlake/gi, businessName)
+      .replace(/Flower Mound|Hurst/gi, "Southlake"),
+    heroCommitmentLabel: (settings.heroCommitmentLabel || "").replace(/TWO BUDZ|HURST STORE/gi, "SOUTHLAKE STORE").replace(/[-_]/g, " "),
     seoTitleOverride: (settings.seoTitleOverride || "")
       .replace(/Two\s*Budz/gi, businessName)
-      .replace(/Flower Mound/gi, "Hurst"),
+      .replace(/CBD American Shaman of Southlake/gi, businessName)
+      .replace(/Flower Mound|Hurst/gi, "Southlake"),
     seoDescriptionOverride: (settings.seoDescriptionOverride || "")
       .replace(/Two\s*Budz/gi, businessName)
-      .replace(/Flower Mound/gi, "Hurst"),
+      .replace(/CBD American Shaman of Southlake/gi, businessName)
+      .replace(/Flower Mound|Hurst/gi, "Southlake"),
   });
   const defaultSettings: BusinessSettings = {
     phone: storePhone,
@@ -153,14 +156,14 @@ export default function App() {
     hours:
       "Monday - Friday: 10:30am - 7:30 pm | Saturday: 10:30am - 6:00 pm | Sunday: 11:00 am - 6:00 pm",
     location: storeLocation,
-    heroBadge: "PREMIUM HEMP & CBD • HURST, TX",
+    heroBadge: "PREMIUM HEMP & CBD • SOUTHLAKE TX",
     heroHeadingLine1: "Earthy Purity.",
     heroHeadingLine2: "Crafted Wellness & Relief.",
     heroParagraph:
-      "Welcome to CBD American Shaman of Hurst, your local source for state-compliant hemp, CBD flowers, clean tinctures, and targeted comfort. Sourced for quality with transparent third-party testing.",
+      "Welcome to CBD American Shaman of Southlake (cbdsouthlaketx), your premier local source for state-compliant hemp, CBD flowers, clean tinctures, and targeted comfort. Sourced for quality with transparent third-party testing.",
     heroButtonPrimary: "EXPLORE PRODUCTS",
     heroButtonSecondary: "OUR STORY",
-    heroImage: "/images/hero_bg_1779557711335.png",
+    heroImage: "/images/hero_botanical_oil_1791967587839.jpg",
     heroVerifiedText: "VERIFIED 100% LEGAL",
     heroWidget1Image: "/images/cbd_dropper_1779557730794.png",
     heroWidget1Label: "BEST SELLER",
@@ -168,9 +171,9 @@ export default function App() {
     heroWidget1Rating: "4.9",
     heroWidget2Image: "/images/thc_gummies_pack_1779557751523.png",
     heroWidget2Label: "POPULAR",
-    heroWidget2Title: "Delta-9 Packs",
+    heroWidget2Title: "Delta 9 Packs",
     heroWidget2Sub: "Pure Extraction",
-    heroCommitmentLabel: "HURST STORE COMMITMENT",
+    heroCommitmentLabel: "SOUTHLAKE STORE COMMITMENT",
     heroCommitmentTitle: "Small Business Owned",
     seoTitleOverride: "",
     seoDescriptionOverride: "",
@@ -178,7 +181,7 @@ export default function App() {
   };
   const [businessSettings, setBusinessSettings] = useState<BusinessSettings>(() => {
     if (typeof window !== "undefined") {
-      for (const key of ["hurstcbd_settings", "hurstcbd_business_settings", "hurstcbd_business_info", "twobudz_settings", "twobudz_business_settings", "twobudz_business_info"]) {
+      for (const key of ["cbdsouthlaketx_settings", "cbdsouthlake_settings", "hurstcbd_settings", "hurstcbd_business_settings", "hurstcbd_business_info", "twobudz_settings", "twobudz_business_settings", "twobudz_business_info"]) {
         try {
           const val = localStorage.getItem(key);
           if (val) {
@@ -192,7 +195,7 @@ export default function App() {
   });
   const [categories, setCategories] = useState<CategoryItem[]>(() => {
     if (typeof window !== "undefined") {
-      for (const key of ["hurstcbd_categories", "hurstcbd_custom_categories", "twobudz_categories", "twobudz_custom_categories"]) {
+      for (const key of ["cbdsouthlaketx_categories", "cbdsouthlake_categories", "hurstcbd_categories", "hurstcbd_custom_categories", "twobudz_categories", "twobudz_custom_categories"]) {
         try {
           const val = localStorage.getItem(key);
           if (val) {
@@ -207,50 +210,64 @@ export default function App() {
   const [reviews, setReviews] = useState<ReviewItem[]>([]);
 
   React.useEffect(() => {
-    const readStored = (keys: string[]) => {
-      for (const key of keys) {
-        try {
-          const value = localStorage.getItem(key);
-          if (value) return JSON.parse(value);
-        } catch (e) {}
+    const reloadStoreFromStorage = () => {
+      const readStored = (keys: string[]) => {
+        for (const key of keys) {
+          try {
+            const value = localStorage.getItem(key);
+            if (value) return JSON.parse(value);
+          } catch (e) {}
+        }
+        return null;
+      };
+
+      const savedProducts = readStored(["cbdsouthlaketx_products", "cbdsouthlake_products", "hurstcbd_products", "hurstcbd_custom_products", "twobudz_products", "twobudz_custom_products"]);
+      if (Array.isArray(savedProducts) && savedProducts.length > 0) setProducts(savedProducts);
+
+      const savedBlogs = readStored(["cbdsouthlaketx_blogs", "cbdsouthlake_blogs", "hurstcbd_blogs", "twobudz_blogs"]);
+      if (Array.isArray(savedBlogs) && savedBlogs.length > 0) {
+        setBlogPosts(savedBlogs.map((post: BlogPost) => ({ ...post, image: resolveBlogImage(post) })));
       }
-      return null;
+
+      const savedFaqs = readStored(["cbdsouthlaketx_faqs", "cbdsouthlake_faqs", "hurstcbd_faqs", "twobudz_faqs"]);
+      if (Array.isArray(savedFaqs) && savedFaqs.length > 0) setFaqItems(savedFaqs);
+
+      const savedOrders = readStored(["cbdsouthlaketx_orders", "cbdsouthlake_orders", "hurstcbd_orders", "twobudz_orders"]);
+      if (Array.isArray(savedOrders)) setOrders(savedOrders);
+
+      const savedInquiries = readStored(["cbdsouthlaketx_inquiries", "cbdsouthlake_inquiries", "hurstcbd_inquiries", "twobudz_inquiries"]);
+      if (Array.isArray(savedInquiries)) setInquiries(savedInquiries);
+
+      const savedSettings = readStored([
+        "cbdsouthlaketx_settings",
+        "cbdsouthlake_settings",
+        "hurstcbd_settings",
+        "hurstcbd_business_settings",
+        "hurstcbd_business_info",
+        "twobudz_settings",
+        "twobudz_business_settings",
+        "twobudz_business_info",
+      ]);
+      if (savedSettings && typeof savedSettings === "object") {
+        setBusinessSettings(normalizeBusinessSettings({ ...defaultSettings, ...savedSettings }));
+      }
+
+      const savedCategories = readStored(["cbdsouthlaketx_categories", "cbdsouthlake_categories", "hurstcbd_categories", "hurstcbd_custom_categories", "twobudz_categories", "twobudz_custom_categories"]);
+      if (Array.isArray(savedCategories) && savedCategories.length > 0) setCategories(savedCategories);
+
+      const savedReviews = readStored(["cbdsouthlaketx_reviews", "cbdsouthlake_reviews", "hurstcbd_reviews", "twobudz_reviews"]);
+      if (Array.isArray(savedReviews) && savedReviews.length > 0) setReviews(savedReviews);
     };
 
-    const savedProducts = readStored(["hurstcbd_products", "hurstcbd_custom_products", "twobudz_products", "twobudz_custom_products"]);
-    if (Array.isArray(savedProducts) && savedProducts.length > 0) setProducts(savedProducts);
+    reloadStoreFromStorage();
 
-    const savedBlogs = readStored(["hurstcbd_blogs", "twobudz_blogs"]);
-    if (Array.isArray(savedBlogs) && savedBlogs.length > 0) {
-      setBlogPosts(savedBlogs.map((post: BlogPost) => ({ ...post, image: resolveBlogImage(post) })));
-    }
-
-    const savedFaqs = readStored(["hurstcbd_faqs", "twobudz_faqs"]);
-    if (Array.isArray(savedFaqs) && savedFaqs.length > 0) setFaqItems(savedFaqs);
-
-    const savedOrders = readStored(["hurstcbd_orders", "twobudz_orders"]);
-    if (Array.isArray(savedOrders)) setOrders(savedOrders);
-
-    const savedInquiries = readStored(["hurstcbd_inquiries", "twobudz_inquiries"]);
-    if (Array.isArray(savedInquiries)) setInquiries(savedInquiries);
-
-    const savedSettings = readStored([
-      "hurstcbd_settings",
-      "hurstcbd_business_settings",
-      "hurstcbd_business_info",
-      "twobudz_settings",
-      "twobudz_business_settings",
-      "twobudz_business_info",
-    ]);
-    if (savedSettings && typeof savedSettings === "object") {
-      setBusinessSettings(normalizeBusinessSettings({ ...defaultSettings, ...savedSettings }));
-    }
-
-    const savedCategories = readStored(["hurstcbd_categories", "hurstcbd_custom_categories", "twobudz_categories", "twobudz_custom_categories"]);
-    if (Array.isArray(savedCategories) && savedCategories.length > 0) setCategories(savedCategories);
-
-    const savedReviews = readStored(["hurstcbd_reviews", "twobudz_reviews"]);
-    if (Array.isArray(savedReviews) && savedReviews.length > 0) setReviews(savedReviews);
+    // Listen for custom store-data-updated event from Admin JSON imports
+    window.addEventListener("store-data-updated", reloadStoreFromStorage);
+    window.addEventListener("storage", reloadStoreFromStorage);
+    return () => {
+      window.removeEventListener("store-data-updated", reloadStoreFromStorage);
+      window.removeEventListener("storage", reloadStoreFromStorage);
+    };
   }, []);
 
   // Floating Scroll to Top State & Listener
@@ -1075,97 +1092,97 @@ export default function App() {
   React.useEffect(() => {
     let title =
       businessSettings.seoTitleOverride ||
-      "CBD American Shaman of Hurst | CBD & Hemp Wellness";
+      "CBD American Shaman of Southlake | CBD & Hemp Wellness";
     let description =
       businessSettings.seoDescriptionOverride ||
-      "Hurst's trusted source for certified, state-compliant Delta-9, CBD flowers, clean tinctures, and wellness products. Explore products with third-party lab testing.";
+      "Southlake's trusted source for certified, state-compliant Delta-9, CBD flowers, clean tinctures, and wellness products. Explore products with third-party lab testing.";
     let keywords =
       businessSettings.seoKeywordsOverride ||
-      "cbd, delta 9, Hurst Texas, organic hemp, gummies, sleep aid, wellness";
+      "cbd, delta 9, Southlake Texas, organic hemp, gummies, sleep aid, wellness";
 
     // Calculate Canonical URL dynamically for current view
-    let canonicalUrl = "https://cbdhurst.com/";
+    let canonicalUrl = "https://cbdsouthlaketx.com/";
 
     if (currentView === "blogs") {
-      title = `Cannabis & Botanical Wellness Blog | CBD American Shaman of Hurst`;
-      description = `Discover clinical insights, dosing guides, and expert advice on CBD, Delta 9, and hemp extracts in Hurst, TX.`;
-      canonicalUrl = "https://cbdhurst.com/blog";
+      title = `Cannabis & Botanical Wellness Blog | CBD American Shaman of Southlake`;
+      description = `Discover clinical insights, dosing guides, and expert advice on CBD, Delta 9, and hemp extracts in Southlake, TX.`;
+      canonicalUrl = "https://cbdsouthlaketx.com/blog";
     } else if (currentView === "learn" && activeInfoTopic) {
       const activeLp = findLearnPageBySlugOrTitle(activeInfoTopic);
       if (activeLp) {
-        title = activeLp.metaTitle || `${activeLp.title} | CBD American Shaman of Hurst`;
+        title = activeLp.metaTitle || `${activeLp.title} | CBD American Shaman of Southlake`;
         description = activeLp.metaDescription || description;
       }
       const cleanTopic = activeInfoTopic.replace(/^\//, "");
-      canonicalUrl = `https://cbdhurst.com/${cleanTopic}`;
+      canonicalUrl = `https://cbdsouthlaketx.com/${cleanTopic}`;
     }
 
     if (currentView === "shop") {
-      title = "Shop Organic CBD & State-Compliant Hemp | CBD American Shaman of Hurst";
+      title = "Shop Organic CBD & State-Compliant Hemp | CBD American Shaman of Southlake";
       description =
         "Browse our catalog of artisanal gummies, CBD tinctures, Delta-9, hemp flower, and premium pet formulas. 100% lab tested for purity.";
       keywords =
         "buy cbd online, cbd tinctures texas, delta-9 gummies Hurst, organic pet cbd";
-      canonicalUrl = "https://cbdhurst.com/shop";
+      canonicalUrl = "https://cbdsouthlaketx.com/shop";
     } else if (currentView === "about") {
-      title = "Our Story & Sourcing Purity | CBD American Shaman of Hurst";
+      title = "Our Story & Sourcing Purity | CBD American Shaman of Southlake";
       description =
-        "Learn about CBD American Shaman of Hurst's commitment to clean extraction and providing third-party certified wellness products to our community.";
+        "Learn about CBD American Shaman of Southlake's commitment to clean extraction and providing third-party certified wellness products to our community.";
       keywords =
-        "CBD American Shaman of Hurst, organic hemp sourcing, gmp certified extraction, Texas CBD";
-      canonicalUrl = "https://cbdhurst.com/about";
+        "CBD American Shaman of Southlake, organic hemp sourcing, gmp certified extraction, Texas CBD";
+      canonicalUrl = "https://cbdsouthlaketx.com/about";
     } else if (currentView === "contact") {
-      title = "Contact & Storefront | CBD American Shaman of Hurst";
+      title = "Contact & Storefront | CBD American Shaman of Southlake";
       description =
-        "Connect with our certified cannabinoid wellness consultants or visit our Hurst storefront. Dosing support, hours, and store directions.";
+        "Connect with our certified cannabinoid wellness consultants or visit our Southlake storefront. Dosing support, hours, and store directions.";
       keywords =
-        "CBD American Shaman of Hurst contact, Hurst CBD store address, CBD store phone number";
-      canonicalUrl = "https://cbdhurst.com/contact";
+        "CBD American Shaman of Southlake contact, Hurst CBD store address, CBD store phone number";
+      canonicalUrl = "https://cbdsouthlaketx.com/contact";
     } else if (currentView === "faq") {
-      title = "Answers & Dosing Guides | CBD American Shaman of Hurst FAQ";
+      title = "Answers & Dosing Guides | CBD American Shaman of Southlake FAQ";
       description =
-        "Have questions about legal compliance, THC limits, proper sublingual dosing, or pickup times in Hurst? Read our detailed guides.";
+        "Have questions about legal compliance, THC limits, proper sublingual dosing, or pickup times in Southlake? Read our detailed guides.";
       keywords =
         "cbd faq, drug test info, legal hemp limits, cbd dosing directions";
-      canonicalUrl = "https://cbdhurst.com/faq";
+      canonicalUrl = "https://cbdsouthlaketx.com/faq";
     } else if (currentView === "product-detail" && selectedProduct) {
-      title = selectedProduct.metaTitle || `${selectedProduct.name} | CBD American Shaman of Hurst`;
+      title = selectedProduct.metaTitle || `${selectedProduct.name} | CBD American Shaman of Southlake`;
       description =
         selectedProduct.metaDescription || selectedProduct.description;
       keywords =
         selectedProduct.tags ||
         `${selectedProduct.name}, ${selectedProduct.categoryLabel}, organic wellness`;
-      canonicalUrl = `https://cbdhurst.com/products/${selectedProduct.slug || selectedProduct.id}`;
+      canonicalUrl = `https://cbdsouthlaketx.com/products/${selectedProduct.slug || selectedProduct.id}`;
     } else if (currentView === "blog-article" && activeArticle) {
       title =
-        activeArticle.metaTitle || `${activeArticle.title} | CBD American Shaman of Hurst Journal`;
+        activeArticle.metaTitle || `${activeArticle.title} | CBD American Shaman of Southlake Journal`;
       description = activeArticle.metaDescription || activeArticle.summary;
       keywords =
         activeArticle.tags ||
         `${activeArticle.category}, cannabinoids, educational insights`;
       canonicalUrl =
         (activeArticle.canonicalUrl && activeArticle.canonicalUrl.trim()) ||
-        `https://cbdhurst.com/blog/${activeArticle.slug || activeArticle.id}`;
+        `https://cbdsouthlaketx.com/blog/${activeArticle.slug || activeArticle.id}`;
     } else if (currentView === "learn" && activeInfoTopic) {
-      title = `${activeInfoTopic} | CBD American Shaman of Hurst Learning Center`;
+      title = `${activeInfoTopic} | CBD American Shaman of Southlake Learning Center`;
       description = `Read certified guidelines, benefits, and local Texas compliance details regarding ${activeInfoTopic}. Empowering your wellness journey.`;
       keywords = `${activeInfoTopic.toLowerCase()}, endocannabinoid system, texas compliance, dosing information`;
-      canonicalUrl = `https://cbdhurst.com/${activeInfoTopic.replace(/^\//, "")}`;
+      canonicalUrl = `https://cbdsouthlaketx.com/${activeInfoTopic.replace(/^\//, "")}`;
     } else if (currentView === "terms") {
-      canonicalUrl = "https://cbdhurst.com/terms";
+      canonicalUrl = "https://cbdsouthlaketx.com/terms";
     } else if (currentView === "privacy") {
-      canonicalUrl = "https://cbdhurst.com/privacy";
+      canonicalUrl = "https://cbdsouthlaketx.com/privacy";
     } else if (currentView === "admin") {
-      canonicalUrl = "https://cbdhurst.com/admin";
+      canonicalUrl = "https://cbdsouthlaketx.com/admin";
     }
 
     title = title
       .replace(/Two\s*Budz/gi, businessName)
-      .replace(/Flower Mound/gi, "Hurst");
+      .replace(/Flower Mound|Hurst/gi, "Southlake");
     description = description
       .replace(/Two\s*Budz/gi, businessName)
-      .replace(/Flower Mound/gi, "Hurst");
-    keywords = keywords.replace(/Two\s*Budz/gi, businessName).replace(/Flower Mound/gi, "Hurst");
+      .replace(/Flower Mound|Hurst/gi, "Southlake");
+    keywords = keywords.replace(/Two\s*Budz/gi, businessName).replace(/Flower Mound|Hurst/gi, "Southlake");
 
     // Apply Meta Title
     document.title = title;
@@ -1447,7 +1464,7 @@ export default function App() {
                     Popular Products
                   </h2>
                   <p className="text-[#52796f] text-sm">
-                    Hand-crafted organic hemp formulations preferred by our local community in Hurst, TX.
+                    Hand-crafted organic hemp formulations preferred by our local community in Southlake, TX.
                   </p>
                 </div>
 
@@ -1513,9 +1530,6 @@ export default function App() {
                 window.scrollTo({ top: 300, behavior: "smooth" });
               }}
             />
-
-            {/* Sign Up for Our Newsletter Banner Strip with leaf backdrop */}
-            <NewsletterBanner />
 
             {/* Your Trust is Our Top Concern - 4 Testimonial Cards */}
             <Testimonials />
@@ -1634,7 +1648,7 @@ export default function App() {
                   Have Unresolved Questions?
                 </h3>
                 <p className="text-[#5b6b55] text-xs leading-relaxed">
-                  Connect with our counselors in Hurst directly for
+                  Connect with our counselors in Southlake directly for
                   personalized dosing advice and regulatory support.
                 </p>
                 <button
@@ -1814,7 +1828,7 @@ export default function App() {
               <div className="space-y-4">
                 <div className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#3b142e] uppercase">
                   <Sparkles className="w-4.5 h-4.5" />
-                  <span>CBD American Shaman of Hurst</span>
+                  <span>CBD American Shaman of Southlake</span>
                 </div>
                 <h3 className="text-[#2c3527] font-serif font-black text-xl leading-tight">
                   Get in Touch with Earthy Purity

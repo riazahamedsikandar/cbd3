@@ -83,7 +83,7 @@ export default function LearnPage({
               <div className="flex items-center gap-2">
                 <span className="inline-flex items-center gap-1.5 text-[10px] font-mono tracking-widest text-[#3b142e] uppercase font-black bg-[#edf2e8] px-3 py-1 rounded-full border border-[#cbd5c2]/40 shadow-2xs">
                   <BookOpen className="w-3.5 h-3.5" />
-                  <span>Hurst Botanical Learning Center</span>
+                  <span>Southlake Botanical Learning Center</span>
                 </span>
               </div>
               <h1 className="text-2xl sm:text-4xl md:text-5xl font-serif font-black text-[#2c3527] leading-tight tracking-tight">
@@ -103,7 +103,7 @@ export default function LearnPage({
                   100% Certified Lab Verified
                 </span>
                 <span className="text-xs font-bold text-[#2c3527]">
-                  Hurst, TX Store
+                  Southlake, TX Store
                 </span>
               </div>
             </div>
@@ -249,10 +249,10 @@ export default function LearnPage({
                 Visit In Person
               </span>
               <h4 className="text-lg font-serif font-black leading-tight text-white">
-                Hurst Storefront
+                Southlake Storefront
               </h4>
               <p className="text-xs text-[#cbd5c2] leading-relaxed">
-                730 W Pipeline Rd, Hurst, TX 76053. Speak with our certified cannabinoid wellness guides today.
+                730 W Pipeline Rd, Southlake, TX 76053. Speak with our certified cannabinoid wellness guides today.
               </p>
               <div className="pt-2 text-xs font-mono font-bold">
                 Call: <a href="tel:+18174943335" className="text-[#f0bc37] hover:text-white underline underline-offset-2 transition-colors">(817) 494-3335</a>

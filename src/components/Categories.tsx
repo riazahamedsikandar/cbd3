@@ -82,7 +82,7 @@ export default function Categories({
             Browse Authentic Herbal Wellness
           </h2>
           <p className="text-xs sm:text-sm text-[#52796f]">
-            Lab-tested, Farm Bill compliant formulations available for local pickup in Hurst, TX
+            Lab-tested, Farm Bill compliant formulations available for local pickup in Southlake, TX
           </p>
         </div>
 
@@ -91,6 +91,7 @@ export default function Categories({
           {activeCategories.map((cat) => {
             const count = getProductCount(cat.id);
             const imgSrc = getCategoryImage(cat);
+            const cleanTitle = (cat.title || cat.id || "Wellness").replace(/[-_]/g, " ");
 
             return (
               <button
@@ -102,7 +103,7 @@ export default function Categories({
                 <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-2xl overflow-hidden bg-[#f4f7f2] border-2 border-[#e1e8db] group-hover:border-[#13382c] group-hover:shadow-lg transition-all duration-300 p-2 flex items-center justify-center">
                   <img
                     src={imgSrc}
-                    alt={cat.title}
+                    alt={cleanTitle}
                     className="w-full h-full object-cover rounded-xl group-hover:scale-108 transition-transform duration-500"
                     referrerPolicy="no-referrer"
                     onError={(e) => {
@@ -114,8 +115,8 @@ export default function Categories({
 
                 {/* Title & Count */}
                 <div className="mt-3.5 flex flex-col items-center gap-0.5 font-sans">
-                  <span className="text-xs sm:text-sm font-bold text-[#13382c] group-hover:text-[#2d6a4f] transition-colors leading-tight">
-                    {cat.title}
+                  <span className="text-xs sm:text-sm font-bold text-[#13382c] group-hover:text-[#2d6a4f] transition-colors leading-tight capitalize">
+                    {cleanTitle}
                   </span>
                   <span className="text-xs font-semibold text-[#2d6a4f]">
                     ({count} items)

@@ -83,20 +83,17 @@ export default function Blog({
 
         {/* Hero Header Area - Clean White Reader Design */}
         <div className="max-w-4xl mx-auto w-full px-6 pt-8 pb-4 space-y-6">
-          {selectedImg && (
-            <div className="w-full rounded-2xl overflow-hidden border border-[#e1e8db] bg-[#f7f9f4] shadow-xs">
-              <img
-                src={selectedImg}
-                alt={selectedPost.title}
-                className="w-full h-auto max-h-[500px] object-cover object-center block rounded-2xl"
-                onError={(e) => {
-                  const container = (e.target as HTMLElement).parentElement;
-                  if (container) container.style.display = "none";
-                }}
-                referrerPolicy="no-referrer"
-              />
-            </div>
-          )}
+          <div className="w-full rounded-2xl overflow-hidden border border-[#e1e8db] bg-[#e8eee4] shadow-xs">
+            <img
+              src={selectedImg || "/images/blog_spectrum_oil.jpg"}
+              alt={selectedPost.title}
+              className="w-full h-auto max-h-[500px] object-cover object-center block rounded-2xl"
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "/images/blog_spectrum_oil.jpg";
+              }}
+              referrerPolicy="no-referrer"
+            />
+          </div>
 
           <div className="space-y-3">
             <span className="inline-block bg-[#3b142e] text-white text-[10px] font-mono font-black px-3 py-1 rounded-sm uppercase tracking-widest">
@@ -130,14 +127,14 @@ export default function Blog({
             <MarkdownArticleRenderer content={selectedPost.content} />
           </div>
 
-          {/* Disclaimer feedback desk */}
+        {/* Disclaimer feedback desk */}
           <div className="pt-8 border-t border-[#e1e8db] mt-12 bg-white rounded-2xl p-6 border border-[#e1e8db] space-y-3 shadow-sm">
             <span className="text-[10px] font-mono font-bold tracking-widest text-[#c49b1a] block uppercase animate-pulse">
               REGULATORY SATISFACTION STATEMENT
             </span>
             <p className="text-xs text-[#72856a] font-sans leading-relaxed">
               *Disclaimer: To explore more customized support matching your
-              physical goals, visit our storefront in Hurst, TX. Our
+              physical goals, visit our storefront in Southlake, TX. Our
               well-trained, passionate experts can answer
               cannabinoid metrics on purity, legal thresholds, and sublingual
               infusion techniques so you feel fully comfortable. Always consult
@@ -149,13 +146,13 @@ export default function Blog({
           {/* Bottom Navigation close actions */}
           <div className="pt-12 border-t border-[#e1e8db] flex flex-col sm:flex-row gap-4 items-center justify-between text-xs font-mono text-[#72856a] mt-12">
             <span>
-              © 2026 CBD American Shaman of Hurst • Hurst, TX
+              © 2026 CBD American Shaman of Southlake • Southlake, TX
             </span>
             <button
               onClick={handleClosePost}
               className="w-full sm:w-auto px-8 py-3 rounded-full border border-[#e1e8db] hover:border-[#3b142e] bg-white font-bold text-[#5b6b55] hover:text-[#2c3527] uppercase tracking-wider transition-all duration-300 cursor-pointer"
             >
-              Back to Articles list
+              Back to Blogs
             </button>
           </div>
         </div>
@@ -175,7 +172,7 @@ export default function Blog({
             EDUCATIONAL JOURNAL
           </p>
           <h2 className="text-3xl sm:text-4xl font-serif font-black tracking-tight text-[#13382c]">
-            News &amp; <span className="text-[#2d6a4f]">Articles</span>
+            Blogs
           </h2>
           <p className="text-[#2c3527] text-xs sm:text-sm font-medium">
             Read medical insights, dosage guidance charts, cannabinoid
@@ -186,8 +183,8 @@ export default function Blog({
         {/* Blog Post Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 items-stretch">
           {displayPosts.map((post) => {
-            const postImg = getPostImage(post);
-            const hasImage = !!postImg;
+            const postImg = getPostImage(post) || "/images/blog_spectrum_oil.jpg";
+            const cleanCategory = (post.category || "Hemp Wellness").replace(/[-_]/g, " ");
 
             return (
               <div
@@ -195,47 +192,29 @@ export default function Blog({
                 onClick={() => handleOpenPost(post)}
                 className="group rounded-2xl overflow-hidden bg-white border border-[#e1e8db] cursor-pointer hover:border-[#13382c] hover:shadow-xl transition-all duration-300 flex flex-col shadow-xs hover:-translate-y-1"
               >
-                {/* Cover Image Stage - ONLY rendered if post has a verified image */}
-                {hasImage && (
-                  <div className="relative w-full aspect-[16/9] overflow-hidden border-b border-[#e1e8db] shrink-0 bg-[#f7f9f4]">
-                    <img
-                      src={postImg}
-                      alt={post.title}
-                      className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
-                      onError={(e) => {
-                        const container = (e.target as HTMLElement).parentElement;
-                        if (container) container.style.display = "none";
-                      }}
-                      referrerPolicy="no-referrer"
-                    />
-                    <span className="absolute bottom-3 left-3 z-10 bg-[#13382c] text-white text-[9px] font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wider shadow-sm">
-                      {post.category}
-                    </span>
-                  </div>
-                )}
+                {/* Cover Image Stage - Always visible with crisp botanical photo */}
+                <div className="relative w-full aspect-[16/9] overflow-hidden border-b border-[#e1e8db] shrink-0 bg-[#e8eee4]">
+                  <img
+                    src={postImg}
+                    alt={post.title}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 ease-out group-hover:scale-105"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "/images/blog_spectrum_oil.jpg";
+                    }}
+                    referrerPolicy="no-referrer"
+                  />
+                  <span className="absolute bottom-3 left-3 z-10 bg-[#13382c] text-white text-[9px] font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wider shadow-sm">
+                    {cleanCategory}
+                  </span>
+                </div>
 
                 {/* Text Description Content */}
                 <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between font-sans">
                   <div className="space-y-3">
-                    {/* If post has NO image, show category badge cleanly here */}
-                    {!hasImage && (
-                      <div className="flex items-center justify-between">
-                        <span className="bg-[#13382c] text-white text-[9px] font-mono font-bold px-2.5 py-1 rounded uppercase tracking-wider">
-                          {post.category}
-                        </span>
-                        <div className="flex items-center gap-1.5 text-[10px] text-[#2d6a4f] font-mono font-semibold">
-                          <Calendar className="w-3 h-3 text-[#13382c]" />
-                          <span>{post.date}</span>
-                        </div>
-                      </div>
-                    )}
-
-                    {hasImage && (
-                      <div className="flex items-center gap-1.5 text-[10px] text-[#2d6a4f] font-mono font-semibold">
-                        <Calendar className="w-3 h-3 text-[#13382c]" />
-                        <span>{post.date}</span>
-                      </div>
-                    )}
+                    <div className="flex items-center gap-1.5 text-[10px] text-[#2d6a4f] font-mono font-semibold">
+                      <Calendar className="w-3 h-3 text-[#13382c]" />
+                      <span>{post.date}</span>
+                    </div>
 
                     <h3 className="text-lg sm:text-xl font-serif font-black text-[#13382c] group-hover:text-[#2d6a4f] transition-colors line-clamp-2 leading-snug">
                       {post.title}
@@ -246,7 +225,7 @@ export default function Blog({
                   </div>
 
                   <div className="pt-4 border-t border-[#edf2e8] mt-4 flex items-center justify-between text-xs text-[#13382c] font-bold uppercase tracking-wider group-hover:text-[#2d6a4f] transition-colors">
-                    <span>Read Article</span>
+                    <span>Read Blog</span>
                     <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </div>
@@ -255,14 +234,14 @@ export default function Blog({
           })}
         </div>
 
-        {/* View All Articles button on Homepage */}
+        {/* View All Blogs button on Homepage */}
         {isHomepage && onViewAllBlogs && (
           <div className="text-center pt-2">
             <button
               onClick={onViewAllBlogs}
               className="inline-flex items-center gap-2 px-8 py-3.5 bg-[#13382c] hover:bg-[#1e493c] text-white font-bold rounded-full text-xs uppercase tracking-wider transition-all duration-300 shadow-md cursor-pointer hover:shadow-lg"
             >
-              <span>View All Articles &amp; Guides</span>
+              <span>View All Blogs</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>

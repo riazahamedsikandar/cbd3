@@ -15,7 +15,7 @@ export default function TermsPage({ setView }: { setView?: (view: string) => voi
             Terms of Service
           </h1>
           <p className="text-xs sm:text-sm font-mono text-[#cbd5c2]">
-            Last Updated: August 2026 • CBD American Shaman of Hurst • Hurst, TX
+            Last Updated: August 2026 • CBD American Shaman of Southlake • Southlake, TX
           </p>
         </div>
       </div>
@@ -28,7 +28,7 @@ export default function TermsPage({ setView }: { setView?: (view: string) => voi
             <span>Strict Age Verification Requirement (21+)</span>
           </div>
           <p className="text-[#2c3527] font-bold">
-            You must be at least twenty-one (21) years of age to purchase products from CBD American Shaman of Hurst, enter our storefront, or browse our online platform.
+            You must be at least twenty-one (21) years of age to purchase products from CBD American Shaman of Southlake, enter our storefront, or browse our online platform.
           </p>
           <p className="text-[#5b6b55]">
             By accessing our store, placing an order, or creating an account, you legally affirm that you are at least 21 years old. Age verification screens and valid government-issued photo ID checks are strictly required upon order delivery or in-store pickup.
@@ -41,7 +41,7 @@ export default function TermsPage({ setView }: { setView?: (view: string) => voi
             1. Federal & State Hemp Compliance
           </h2>
           <p>
-            All botanical formulas, tinctures, edibles, gummies, topicals, and sparkling beverages sold by CBD American Shaman of Hurst are derived exclusively from industrial hemp cultivated and produced in strict accordance with the <strong>2018 Federal Farm Bill (Section 10113)</strong> and <strong>Texas House Bill 1325 (Texas Agriculture Code Chapter 121)</strong>.
+            All botanical formulas, tinctures, edibles, gummies, topicals, and sparkling beverages sold by CBD American Shaman of Southlake are derived exclusively from industrial hemp cultivated and produced in strict accordance with the <strong>2018 Federal Farm Bill (Section 10113)</strong> and <strong>Texas House Bill 1325 (Texas Agriculture Code Chapter 121)</strong>.
           </p>
           <p>
             Every product contains a total Delta-9 Tetrahydrocannabinol (Δ9-THC) concentration that does not exceed <strong>0.3% on a dry weight basis</strong>. Independent Certificates of Analysis (COAs) are publicly available for every batch.
@@ -64,11 +64,11 @@ export default function TermsPage({ setView }: { setView?: (view: string) => voi
         {/* Section 3 */}
         <div className="space-y-3 bg-white p-6 sm:p-8 rounded-2xl border border-[#e1e8db] shadow-2xs">
           <h2 className="text-lg sm:text-xl font-serif font-bold text-[#2c3527] pb-2 border-b border-[#edf2e8]">
-            3. Ordering, Local Pickup & Hurst Delivery
+            3. Ordering, Local Pickup & Southlake Delivery
           </h2>
           <ul className="list-disc pl-5 space-y-2 text-[#5b6b55]">
-            <li><strong>In-Store Pickup:</strong> Orders placed for pickup at 730 W Pipeline Rd, Hurst, TX 76053 are held for up to 48 hours. Photo ID is mandatory.</li>
-            <li><strong>Local Delivery:</strong> Same-day and scheduled local delivery is available in Hurst and surrounding DFW communities. The recipient must be present with valid ID.</li>
+            <li><strong>In-Store Pickup:</strong> Orders placed for pickup at 730 W Pipeline Rd, Southlake, TX 76053 are held for up to 48 hours. Photo ID is mandatory.</li>
+            <li><strong>Local Delivery:</strong> Same-day and scheduled local delivery is available in Southlake and surrounding DFW communities. The recipient must be present with valid ID.</li>
             <li><strong>Shipping:</strong> We ship strictly to jurisdictions where industrial hemp products are legally permitted under local municipal laws.</li>
           </ul>
         </div>

@@ -30,9 +30,9 @@ export default function Header({
   toggleCart,
   settings = {
     phone: "+1 (817) 494-3335",
-    email: "info@cbdhurst.com",
+    email: "info@cbdsouthlaketx.com",
     hours: "Mon - Fri: 10:30 AM - 7:30 PM | Sat: 10:30 AM - 6:30 PM | Sun: 11:00 AM - 6:00 PM",
-    location: "730 W Pipeline Rd, Hurst, TX 76053"
+    location: "Southlake, TX 76092"
   },
   categories = [],
   setSelectedCategory,
@@ -224,7 +224,7 @@ export default function Header({
           <div className="w-20 sm:w-24 h-14 sm:h-16 overflow-hidden flex items-center justify-center transition-all duration-300">
             <img
               src={logoImg}
-              alt="CBD American Shaman of Hurst"
+              alt="CBD American Shaman of Southlake"
               className="w-full h-full object-contain transform group-hover:scale-[1.03] transition-transform duration-300"
               onError={(e) => {
                 const target = e.target as HTMLImageElement;
@@ -233,7 +233,7 @@ export default function Header({
             />
           </div>
           <span className="max-w-[120px] text-[11px] sm:text-xs leading-tight font-serif font-bold text-[#dfaa5b]">
-            CBD American Shaman of Hurst
+            CBD American Shaman of Southlake
           </span>
         </button>
 
@@ -378,7 +378,7 @@ export default function Header({
                     CBD American Shaman
                   </span>
                   <p className="text-[10px] font-mono tracking-widest text-[#52796f] uppercase">
-                    Hurst, TX
+                    Southlake, TX
                   </p>
                 </button>
                 <button
@@ -463,7 +463,7 @@ export default function Header({
                 Shop Premium Products
               </button>
               <p className="text-center text-[10px] text-[#52796f] font-mono mt-4 uppercase tracking-widest">
-                Hurst, TX • 21+ Required
+                Southlake, TX • 21+ Required
               </p>
             </div>
           </div>

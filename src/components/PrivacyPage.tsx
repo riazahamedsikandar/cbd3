@@ -15,7 +15,7 @@ export default function PrivacyPage({ setView }: { setView?: (view: string) => v
             Privacy Policy
           </h1>
           <p className="text-xs sm:text-sm font-mono text-[#cbd5c2]">
-            Effective Date: August 2026 • CBD American Shaman of Hurst • Hurst, TX
+            Effective Date: August 2026 • CBD American Shaman of Southlake • Southlake, TX
           </p>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default function PrivacyPage({ setView }: { setView?: (view: string) => v
             We process your information strictly for legitimate commercial and wellness service purposes:
           </p>
           <ul className="list-disc pl-5 space-y-1.5 text-[#5b6b55]">
-            <li>Fulfilling, packaging, and delivering your online orders and local Hurst drop-offs.</li>
+            <li>Fulfilling, packaging, and delivering your online orders and local Southlake drop-offs.</li>
             <li>Sending automated order confirmations, delivery tracking updates, and receipt copies.</li>
             <li>Complying with Texas Department of State Health Services (DSHS) retail hemp regulations and mandatory age verification.</li>
             <li>Delivering educational wellness updates and promotional discounts (with one-click opt-out anytime).</li>
@@ -99,15 +99,15 @@ export default function PrivacyPage({ setView }: { setView?: (view: string) => v
             As a Texas resident, you have the right to request access to the personal data we hold about you, request corrections to inaccuracies, or request the deletion of your account data (subject to statutory recordkeeping requirements).
           </p>
           <p>
-            To exercise your privacy rights, please call us at <a href="tel:+18174943335" className="text-[#3b142e] font-bold underline">(817) 494-3335</a> or visit our storefront in Hurst, TX.
+            To exercise your privacy rights, please call us at <a href="tel:+18174943335" className="text-[#3b142e] font-bold underline">(817) 494-3335</a> or visit our storefront in Southlake, TX.
           </p>
         </div>
 
         {/* Contact info box */}
         <div className="bg-[#edf2e8] p-6 rounded-2xl border border-[#cbd5c2] flex flex-col sm:flex-row justify-between items-center gap-4 text-xs">
           <div>
-            <h4 className="font-bold text-[#2c3527]">CBD American Shaman of Hurst Privacy & Compliance Team</h4>
-            <p className="text-[#72856a]">730 W Pipeline Rd, Hurst, TX 76053</p>
+            <h4 className="font-bold text-[#2c3527]">CBD American Shaman of Southlake Privacy & Compliance Team</h4>
+            <p className="text-[#72856a]">730 W Pipeline Rd, Southlake, TX 76053</p>
           </div>
           <a href="tel:+18174943335" className="px-5 py-2.5 rounded-xl bg-[#3b142e] text-white font-bold hover:bg-[#5d2a49] transition-colors">
             Contact Privacy Officer

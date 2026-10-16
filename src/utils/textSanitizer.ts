@@ -5,20 +5,20 @@
 export const cleanUnicodeString = (str: string = ""): string => {
   if (!str) return "";
   return str
-    .replace(/â€“/g, "-")
-    .replace(/â€”/g, "-")
+    .replace(/â€“/g, " ")
+    .replace(/â€”/g, " ")
     .replace(/â€™/g, "'")
     .replace(/â€œ/g, '"')
     .replace(/â€/g, '"')
     .replace(/â/g, "")
-    .replace(/[\u2013\u2014]/g, "-")
+    .replace(/[\u2013\u2014]/g, " ")
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u201C\u201D]/g, '"')
     .trim();
 };
 
 /**
- * Normalizes product titles for 100% resilient matching regardless of dashes, spaces, or mangled characters.
+ * Normalizes product titles for resilient matching.
  */
 export const normalizeTitleForMatching = (title: string = ""): string => {
   if (!title) return "";
@@ -29,21 +29,42 @@ export const normalizeTitleForMatching = (title: string = ""): string => {
 };
 
 /**
- * Replaces any obsolete brand names like "TwoBudz" or old locations with current store branding:
- * "CBD American Shaman of Hurst" / "cbdhurst.com" / "Hurst"
+ * Replaces any obsolete brand names or previous cities with:
+ * "cbdsouthlaketx" / "CBD American Shaman of Southlake" / "Southlake, TX"
  */
 export const sanitizeBrandText = (text: string = ""): string => {
   if (!text) return "";
   return text
-    .replace(/twobudz\.com/gi, "cbdhurst.com")
-    .replace(/shophurstcbd\.com/gi, "cbdhurst.com")
-    .replace(/info@twobudz\.com/gi, "info@cbdhurst.com")
-    .replace(/info@shophurstcbd\.com/gi, "info@cbdhurst.com")
-    .replace(/twobudzcbd@gmail\.com/gi, "info@cbdhurst.com")
-    .replace(/client@twobudz\.com/gi, "client@cbdhurst.com")
-    .replace(/inquiry@twobudz\.com/gi, "inquiry@cbdhurst.com")
-    .replace(/user@twobudz\.com/gi, "user@cbdhurst.com")
-    .replace(/twobudz/gi, "CBD American Shaman of Hurst")
-    .replace(/flower mound/gi, "Hurst");
+    .replace(/twobudz\.com/gi, "cbdsouthlaketx.com")
+    .replace(/shophurstcbd\.com/gi, "cbdsouthlaketx.com")
+    .replace(/cbdhurst\.com/gi, "cbdsouthlaketx.com")
+    .replace(/info@twobudz\.com/gi, "info@cbdsouthlaketx.com")
+    .replace(/info@shophurstcbd\.com/gi, "info@cbdsouthlaketx.com")
+    .replace(/info@cbdhurst\.com/gi, "info@cbdsouthlaketx.com")
+    .replace(/twobudzcbd@gmail\.com/gi, "info@cbdsouthlaketx.com")
+    .replace(/client@twobudz\.com/gi, "contact@cbdsouthlaketx.com")
+    .replace(/inquiry@twobudz\.com/gi, "contact@cbdsouthlaketx.com")
+    .replace(/user@twobudz\.com/gi, "user@cbdsouthlaketx.com")
+    .replace(/CBD American Shaman of Hurst/gi, "CBD American Shaman of Southlake")
+    .replace(/CBD American Shaman Hurst/gi, "CBD American Shaman of Southlake")
+    .replace(/Hurst, TX/gi, "Southlake, TX")
+    .replace(/Hurst Texas/gi, "Southlake, Texas")
+    .replace(/in Hurst\b/gi, "in Southlake")
+    .replace(/twobudz/gi, "CBD American Shaman of Southlake")
+    .replace(/flower mound/gi, "Southlake");
 };
+
+/**
+ * Cleans visible text strings (titles, category names, badges, tags)
+ * so that robotic dashes (-) and underscores (_) are formatted into natural, human English.
+ */
+export const cleanDisplayLabel = (text: string = ""): string => {
+  if (!text) return "";
+  return text
+    .replace(/_+/g, " ")
+    .replace(/-+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+};
+
 

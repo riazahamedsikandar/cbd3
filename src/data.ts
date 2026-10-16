@@ -24,9 +24,9 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: 1,
     name: "Sarah Jenkins",
-    location: "Hurst, TX",
+    location: "Southlake, TX",
     content:
-      "CBD American Shaman of Hurst has completely changed how I deal with daily anxiety. Their Full Spectrum CBD Oil helps me stay focused and calm during stressful corporate meetings, and the taste is remarkably clean. The Hurst community is so lucky to have them!",
+      "CBD American Shaman of Southlake (cbdsouthlaketx) has completely changed how I deal with daily anxiety. Their Full Spectrum CBD Oil helps me stay focused and calm during stressful corporate meetings, and the taste is remarkably clean. The Southlake community is so lucky to have them!",
     rating: 5,
   },
   {
@@ -34,15 +34,15 @@ export const TESTIMONIALS: Testimonial[] = [
     name: "Marcus Ramirez",
     location: "Grapevine, TX",
     content:
-      "The Delta-9 Gummies are incredibly reliable! They give a peaceful body relaxation that helps me wind down after intense heavy workouts without any morning fog. I appreciated the expert guidance in store that helped me select the exact right dosage.",
+      "The Delta 9 Gummies are incredibly reliable! They give a peaceful body relaxation that helps me wind down after intense heavy workouts without any morning fog. I appreciated the expert guidance in store that helped me select the exact right dosage.",
     rating: 5,
   },
   {
     id: 3,
     name: "Evelyn Carter",
-    location: "Lewisville, TX",
+    location: "Colleyville, TX",
     content:
-      "I'm 68 years old and struggled with severe arthritic knee stiffness for a decade. The 1000mg muscle cream works within five minutes. It provides a beautiful cooling sensation and genuine flexibility. This is real relief, organic and top quality.",
+      "I am 68 years old and struggled with knee stiffness for a decade. The 1000mg relief cream works within five minutes. It provides a beautiful cooling sensation and genuine flexibility. This is real relief, organic and top quality.",
     rating: 5,
   },
 ];
@@ -54,32 +54,32 @@ export const FAQ_ITEMS: FAQItem[] = [
     id: 1,
     question: "What is CBD, and how does it support everyday wellness?",
     answer:
-      "CBD (cannabidiol) is a natural, non-psychoactive botanical compound found in high density within industrial hemp. It works by stimulating your body's native endocannabinoid system (ECS), which governs core functions like sleep regulation, systemic inflammation responses, cognitive focus, and mood stability, keeping you in a natural state of balanced wellness.",
+      "CBD (cannabidiol) is a natural, non psychoactive botanical compound found in high density within industrial hemp. It works by stimulating your body's native endocannabinoid system (ECS), which governs core functions like sleep regulation, systemic inflammation responses, cognitive focus, and mood stability, keeping you in a natural state of balanced wellness.",
   },
   {
     id: 2,
     question:
-      "Are your premium products double-tested by independent laboratories?",
+      "Are your premium products double tested by independent laboratories?",
     answer:
-      "Absolutely! Every product on CBD American Shaman of Hurst' shelves is verified by third-party, ISO-certified state laboratories. We rigorously monitor purity, heavy metals, harmful pesticides, residual industrial solvents, and exact milligram potency. Transparent COA test results are readily accessible for every customer block.",
+      "Absolutely! Every product on CBD American Shaman of Southlake shelves is verified by third party, ISO certified state laboratories. We rigorously monitor purity, heavy metals, harmful pesticides, residual industrial solvents, and exact milligram potency. Transparent COA test results are readily accessible for every customer.",
   },
   {
     id: 3,
-    question: "Are Delta-9 and hemp-derived cannabinoids legal under Texas and Federal law?",
+    question: "Are Delta 9 and hemp derived cannabinoids legal under Texas and Federal law?",
     answer:
-      "Yes, 100%! Under both the Texas House Bill 1325 and the Federal Agriculture Improvement Act (Farm Bill), hemp-derived cannabinoids, including Delta-9 THC and CBD, are completely legal to purchase and enjoy, provided they are sourced from industrial hemp and contain less than 0.3% Delta-9 THC by dry weight.",
+      "Yes, 100%! Under both the Texas House Bill 1325 and the Federal Agriculture Improvement Act (Farm Bill), hemp derived cannabinoids, including Delta 9 THC and CBD, are completely legal to purchase and enjoy, provided they are sourced from industrial hemp and contain less than 0.3% Delta 9 THC by dry weight.",
   },
   {
     id: 4,
-    question: "What is the correct dosing advice for a cannabidiol freshman?",
+    question: "What is the correct dosing advice for a beginner?",
     answer:
-      "We strongly recommend a simple 'low and slow' onboarding rhythm. Start with a conservative dose—such as half a gummy (5mg-12.5mg) or five drops of tincture (roughly 10mg)—and allow up to two full hours to assess baseline somatic feelings before introducing secondary doses. Our Hurst in-store staff can guide you individually.",
+      "We strongly recommend a simple 'low and slow' onboarding rhythm. Start with a conservative dose such as half a gummy (5mg to 12.5mg) or five drops of tincture (roughly 10mg) and allow up to two full hours to assess baseline somatic feelings before introducing secondary doses. Our Southlake in store staff can guide you individually.",
   },
   {
     id: 5,
-    question: "Can I pick up orders directly in your Hurst store?",
+    question: "Can I pick up orders directly in your Southlake store?",
     answer:
-      "Yes! You can purchase online directly through this applet and select 'In-Store Pickup' at our main boutique counter in Hurst, TX. Most community orders are processed and ready for discrete packaging inside 30 minutes, or we support rapid local shipping across the entire state of Texas.",
+      "Yes! You can purchase online directly through this website and select In Store Pickup at our boutique counter in Southlake, TX. Most community orders are processed and ready within 30 minutes, or we support rapid local shipping across the entire state of Texas.",
   },
 ];
 

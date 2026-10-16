@@ -7,16 +7,16 @@ import { TESTIMONIALS } from "../data";
 export default function Testimonials() {
   const [activeDot, setActiveDot] = useState(0);
 
-  // Real store testimonials from Hurst and DFW community
+  // Real store testimonials from Southlake and DFW community
   const REAL_REVIEWS = [
     {
       id: 1,
       name: "Sarah Jenkins",
-      location: "Hurst, TX",
+      location: "Southlake, TX",
       rating: 5,
       avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&h=150&q=80",
       content:
-        "CBD American Shaman of Hurst has completely changed how I deal with daily anxiety. Their Full Spectrum CBD Oil helps me stay focused and calm during stressful corporate meetings, and the taste is remarkably clean. The Hurst community is so lucky to have them!",
+        "CBD American Shaman of Southlake has completely changed how I deal with daily anxiety. Their Full Spectrum CBD Oil helps me stay focused and calm during stressful corporate meetings, and the taste is remarkably clean. The Southlake community is so lucky to have them!",
     },
     {
       id: 2,
@@ -25,7 +25,7 @@ export default function Testimonials() {
       rating: 5,
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&h=150&q=80",
       content:
-        "The Delta-9 Gummies are incredibly reliable! They give a peaceful body relaxation that helps me wind down after intense heavy workouts without any morning fog. I appreciated the expert guidance in store that helped me select the exact right dosage.",
+        "The Delta 9 Gummies are incredibly reliable! They give a peaceful body relaxation that helps me wind down after intense heavy workouts without any morning fog. I appreciated the expert guidance in store that helped me select the exact right dosage.",
     },
     {
       id: 3,
@@ -59,7 +59,7 @@ export default function Testimonials() {
             Your Trust is Our Top Concern
           </h2>
           <p className="text-[#52796f] text-sm font-sans">
-            Verified feedback from local families and wellness seekers who found natural comfort at our Hurst boutique.
+            Verified feedback from local families and wellness seekers who found natural comfort at our Southlake boutique.
           </p>
         </div>
 
